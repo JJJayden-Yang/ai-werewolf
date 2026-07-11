@@ -1,0 +1,131 @@
+version: belief_rules_v1
+
+private_confirmations:
+  seer_check_werewolf:
+    target:
+      werewolf: 0.95
+      locked: true
+      lock_reason: "seer_private_check_result"
+
+  seer_check_villager:
+    target:
+      werewolf: 0.05
+      locked: true
+      lock_reason: "seer_private_check_result"
+
+  wolf_teammate:
+    target:
+      werewolf: 1.0
+      locked: true
+      lock_reason: "wolf_team_revealed"
+
+public_claims:
+  claim_seer:
+    scope: "all_alive_agents"
+    actor_delta:
+      seer: 0.25
+      werewolf: 0.28
+    note: "v1.最终(真人1校准):狼悍跳信号上调到 +0.28(原 +0.08)。"
+
+  claim_witch:
+    scope: "all_alive_agents"
+    actor_delta:
+      witch: 0.25
+      werewolf: 0.08
+
+  claim_hunter:
+    scope: "all_alive_agents"
+    actor_delta:
+      hunter: 0.25
+      werewolf: 0.08
+
+  claim_villager:
+    scope: "all_alive_agents"
+    actor_delta:
+      villager: 0.25
+      werewolf: 0.08
+
+  claim_werewolf:
+    scope: "all_alive_agents"
+    actor_delta:
+      werewolf: 0.25
+
+  claim_check_werewolf:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: 0.25
+
+  claim_check_villager:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: -0.20
+
+conflicting_claims:
+  claim_observers_own_unique_role:
+    scope: "agent_perspective"
+    actor_delta:
+      claimed_role: -0.45
+      werewolf: 0.30
+    note: "If I am a unique role and someone else claims my role, that claim is false from my perspective."
+
+  second_claim_same_unique_role:
+    scope: "all_alive_agents"
+    condition:
+      role: "unique_role"
+      max_count: 1
+    current_claimer_delta:
+      claimed_role: 0.0
+      werewolf: 0.10
+    previous_claimers_delta:
+      claimed_role: -0.15
+      werewolf: 0.12
+    note: "v1.最终(真人1校准):后跳不偏判更狼,只轻 +0.10 狼嫌,不加预言家面(原 claimed_role 0.10/狼 0.18)。"
+
+public_events:
+  night_killed:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: -0.35
+      villager: 0.20
+      seer: 0.10
+      witch: 0.05
+
+  vote_cast:
+    scope: "post_game_only"
+    note: "raw vote_cast 不直接更新 belief。带语境的 vote(下方 vote_follow_*/vote_against_*)实时更新。"
+
+  # v1.最终(真人1校准 排序 #1 最重要信号):公开预言家当晚被刀 → 强真预 + 强非狼
+  claimed_seer_night_killed:
+    scope: "all_alive_agents"
+    target_delta:
+      seer: 0.80
+      werewolf: -0.80
+    note: "触发:曾跳过预言家的玩家在 DEATH_CONFIRMED(death_cause=night_kill)。"
+
+  # v1.最终(真人1校准):公开预言家当晚没死 → 轻狼嫌(可能是悍跳;但也可能女巫救)
+  claimed_seer_survives_night:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: 0.45
+    note: "触发:DAY_ANNOUNCEMENT 时,曾跳过预言家的玩家不在 deaths 列表。"
+
+  # v1.最终(真人1校准 排序 #6):跟预言家查杀投票 → 投票者轻好人(乘 cred_seer)
+  vote_follow_claimed_seer_black:
+    scope: "all_alive_agents"
+    voter_delta:
+      werewolf: -0.35
+    note: "触发:VOTE_CAST 的 target 曾被某个跳预言家的玩家公开查杀(claim_check_werewolf)。"
+
+  # v1.最终(真人1校准 排序 #3):投跳预言家的人 → 投票者轻狼嫌
+  vote_against_claimed_seer:
+    scope: "all_alive_agents"
+    voter_delta:
+      werewolf: 0.35
+    note: "触发:VOTE_CAST 的 target 曾跳过预言家。"
+
+  # v1.最终(真人1校准 排序 #9):猎人开枪带人 → 被带的轻狼嫌
+  hunter_shot_target:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: 0.15
+    note: "触发:HUNTER_SHOT 带非空 target。猎人也可能打错,所以只轻判。"

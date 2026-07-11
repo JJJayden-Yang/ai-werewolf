@@ -1,0 +1,10 @@
+{
+  "game_id": "mvp_9p_001",
+  "agent_id": "P6",
+  "role": "hunter",
+  "phase": "HUNTER_SHOOT",
+  "action_type": "hunter_shoot",
+  "target": "P2",
+  "reason_summary": "shoot the highest-suspicion target",
+  "metadata": {"pass": false}
+}

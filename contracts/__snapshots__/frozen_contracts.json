@@ -1,0 +1,7696 @@
+{
+  "enums": {
+    "ActionType": [
+      "speak",
+      "vote",
+      "night_kill_nominate",
+      "check",
+      "save",
+      "poison",
+      "hunter_shoot",
+      "skip"
+    ],
+    "AgentVersion": [
+      "v0_free_llm",
+      "v1_belief_guided",
+      "v2_strategy_memory_optional"
+    ],
+    "Camp": [
+      "werewolf",
+      "villager"
+    ],
+    "ClaimedAlignment": [
+      "werewolf",
+      "villager",
+      "unknown"
+    ],
+    "DeathCause": [
+      "night_kill",
+      "exile",
+      "hunter_shot",
+      "witch_poison"
+    ],
+    "DeviationOutcome": [
+      "correct",
+      "incorrect",
+      "neutral"
+    ],
+    "EventType": [
+      "phase_started",
+      "role_assigned",
+      "wolf_nomination",
+      "night_kill_announced",
+      "seer_check_result",
+      "witch_kill_target_info",
+      "witch_save",
+      "witch_poison",
+      "day_announcement",
+      "speech",
+      "vote_cast",
+      "tie_detected",
+      "no_exile_due_to_second_tie",
+      "exile",
+      "last_words",
+      "hunter_shot",
+      "death_confirmed",
+      "win_check",
+      "game_over",
+      "agent_action",
+      "llm_call",
+      "rule_validation",
+      "fallback_used",
+      "belief_snapshot",
+      "belief_deviation",
+      "action_canonicalized",
+      "action_guard_triggered",
+      "context_assembled",
+      "prompt_version_used",
+      "agent_decision_trace",
+      "fact_stream_summary"
+    ],
+    "FailureCategory": [
+      "system_error",
+      "phase_stuck",
+      "illegal_action_penetration",
+      "context_leak",
+      "missing_private_info",
+      "json_parse_error",
+      "canonicalizer_error",
+      "fallback_overused",
+      "role_leak",
+      "meta_ai_leak",
+      "cot_leak",
+      "context_truncation_error",
+      "timeout_or_rate_limit",
+      "bad_vote",
+      "late_claim",
+      "false_claim_failed",
+      "over_defense",
+      "harmful_bussing",
+      "missed_save",
+      "wrong_poison",
+      "hunter_wrong_shot",
+      "belief_update_error",
+      "harmful_belief_override"
+    ],
+    "Phase": [
+      "INIT",
+      "ROLE_ASSIGNMENT",
+      "NIGHT_WEREWOLF",
+      "NIGHT_SEER",
+      "NIGHT_WITCH",
+      "DAY_ANNOUNCEMENT",
+      "HUNTER_SHOOT",
+      "DAY_DISCUSSION",
+      "DAY_VOTE",
+      "DAY_TIE_DISCUSSION",
+      "DAY_TIE_REVOTE",
+      "EXILE_RESOLUTION",
+      "NO_EXILE_RESOLUTION",
+      "EXILE_LAST_WORDS",
+      "WIN_CHECK",
+      "GAME_OVER"
+    ],
+    "PlayerStatus": [
+      "alive",
+      "dead"
+    ],
+    "Role": [
+      "werewolf",
+      "seer",
+      "witch",
+      "hunter",
+      "villager"
+    ],
+    "Visibility": [
+      "public",
+      "private_to_seer",
+      "private_to_witch",
+      "private_to_wolves"
+    ],
+    "VisibilityLevel": [
+      "runtime_agent_visible",
+      "post_game_replay_visible",
+      "evaluator_visible",
+      "debug_only",
+      "admin_only"
+    ]
+  },
+  "schemas": {
+    "AgentAction": {
+      "$defs": {
+        "ActionType": {
+          "enum": [
+            "speak",
+            "vote",
+            "night_kill_nominate",
+            "check",
+            "save",
+            "poison",
+            "hunter_shoot",
+            "skip"
+          ],
+          "title": "ActionType",
+          "type": "string"
+        },
+        "ClaimResult": {
+          "additionalProperties": false,
+          "properties": {
+            "claimed_alignment": {
+              "$ref": "#/$defs/ClaimedAlignment"
+            },
+            "target": {
+              "title": "Target",
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "claimed_alignment"
+          ],
+          "title": "ClaimResult",
+          "type": "object"
+        },
+        "ClaimedAlignment": {
+          "enum": [
+            "werewolf",
+            "villager",
+            "unknown"
+          ],
+          "title": "ClaimedAlignment",
+          "type": "string"
+        },
+        "Deviation": {
+          "additionalProperties": false,
+          "properties": {
+            "belief_recommended_target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Belief Recommended Target"
+            },
+            "deviation_type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Deviation Type"
+            },
+            "is_deviation_from_belief": {
+              "default": false,
+              "title": "Is Deviation From Belief",
+              "type": "boolean"
+            },
+            "reason": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Reason"
+            },
+            "selected_target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Selected Target"
+            }
+          },
+          "title": "Deviation",
+          "type": "object"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "Timing": {
+          "additionalProperties": false,
+          "properties": {
+            "intent": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Intent"
+            },
+            "mode": {
+              "default": "turn_order",
+              "title": "Mode",
+              "type": "string"
+            },
+            "trigger": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Trigger"
+            }
+          },
+          "title": "Timing",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "action_type": {
+          "$ref": "#/$defs/ActionType"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "belief_used": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Belief Used"
+        },
+        "claim_result": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClaimResult"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "deviation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Deviation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "public_message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Public Message"
+        },
+        "reason_summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason Summary"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "role_claim": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Role"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "timing": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Timing"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "game_id",
+        "agent_id",
+        "role",
+        "phase",
+        "action_type"
+      ],
+      "title": "AgentAction",
+      "type": "object"
+    },
+    "AgentContext": {
+      "$defs": {
+        "ActionType": {
+          "enum": [
+            "speak",
+            "vote",
+            "night_kill_nominate",
+            "check",
+            "save",
+            "poison",
+            "hunter_shoot",
+            "skip"
+          ],
+          "title": "ActionType",
+          "type": "string"
+        },
+        "ClaimRecord": {
+          "additionalProperties": false,
+          "description": "跳身份/查杀台账：从 SPEECH（含 claim_result）事件派生。",
+          "properties": {
+            "actor": {
+              "title": "Actor",
+              "type": "string"
+            },
+            "claim_target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Claim Target"
+            },
+            "claimed_alignment": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/ClaimedAlignment"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "claimed_role": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Role"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "derived_by": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Derived By"
+            },
+            "game_id": {
+              "title": "Game Id",
+              "type": "string"
+            },
+            "is_counter_claim": {
+              "default": false,
+              "title": "Is Counter Claim",
+              "type": "boolean"
+            },
+            "phase": {
+              "$ref": "#/$defs/Phase"
+            },
+            "record_id": {
+              "title": "Record Id",
+              "type": "string"
+            },
+            "round": {
+              "title": "Round",
+              "type": "integer"
+            },
+            "source_event_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Source Event Id"
+            }
+          },
+          "required": [
+            "record_id",
+            "game_id",
+            "round",
+            "phase",
+            "actor"
+          ],
+          "title": "ClaimRecord",
+          "type": "object"
+        },
+        "ClaimResult": {
+          "additionalProperties": false,
+          "properties": {
+            "claimed_alignment": {
+              "$ref": "#/$defs/ClaimedAlignment"
+            },
+            "target": {
+              "title": "Target",
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "claimed_alignment"
+          ],
+          "title": "ClaimResult",
+          "type": "object"
+        },
+        "ClaimedAlignment": {
+          "enum": [
+            "werewolf",
+            "villager",
+            "unknown"
+          ],
+          "title": "ClaimedAlignment",
+          "type": "string"
+        },
+        "EventType": {
+          "enum": [
+            "phase_started",
+            "role_assigned",
+            "wolf_nomination",
+            "night_kill_announced",
+            "seer_check_result",
+            "witch_kill_target_info",
+            "witch_save",
+            "witch_poison",
+            "day_announcement",
+            "speech",
+            "vote_cast",
+            "tie_detected",
+            "no_exile_due_to_second_tie",
+            "exile",
+            "last_words",
+            "hunter_shot",
+            "death_confirmed",
+            "win_check",
+            "game_over",
+            "agent_action",
+            "llm_call",
+            "rule_validation",
+            "fallback_used",
+            "belief_snapshot",
+            "belief_deviation",
+            "action_canonicalized",
+            "action_guard_triggered",
+            "context_assembled",
+            "prompt_version_used",
+            "agent_decision_trace",
+            "fact_stream_summary"
+          ],
+          "title": "EventType",
+          "type": "string"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "PlayerStatus": {
+          "enum": [
+            "alive",
+            "dead"
+          ],
+          "title": "PlayerStatus",
+          "type": "string"
+        },
+        "PrivateEvent": {
+          "additionalProperties": false,
+          "properties": {
+            "event_type": {
+              "$ref": "#/$defs/EventType"
+            },
+            "result": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Result"
+            },
+            "round": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Round"
+            },
+            "target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Target"
+            },
+            "teammates": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Teammates"
+            },
+            "visibility": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Visibility"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "event_type"
+          ],
+          "title": "PrivateEvent",
+          "type": "object"
+        },
+        "PublicEvent": {
+          "additionalProperties": false,
+          "properties": {
+            "actor": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Actor"
+            },
+            "claim_result": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/ClaimResult"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "event_id": {
+              "title": "Event Id",
+              "type": "string"
+            },
+            "event_type": {
+              "$ref": "#/$defs/EventType"
+            },
+            "phase": {
+              "$ref": "#/$defs/Phase"
+            },
+            "public_message": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Public Message"
+            },
+            "role_claim": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Role"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "round": {
+              "title": "Round",
+              "type": "integer"
+            },
+            "summary": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Summary"
+            },
+            "target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Target"
+            }
+          },
+          "required": [
+            "event_id",
+            "round",
+            "phase",
+            "event_type"
+          ],
+          "title": "PublicEvent",
+          "type": "object"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "Visibility": {
+          "enum": [
+            "public",
+            "private_to_seer",
+            "private_to_witch",
+            "private_to_wolves"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        },
+        "VisiblePlayer": {
+          "additionalProperties": false,
+          "properties": {
+            "player_id": {
+              "title": "Player Id",
+              "type": "string"
+            },
+            "public_claim": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Public Claim"
+            },
+            "status": {
+              "$ref": "#/$defs/PlayerStatus"
+            }
+          },
+          "required": [
+            "player_id",
+            "status"
+          ],
+          "title": "VisiblePlayer",
+          "type": "object"
+        },
+        "VoteRecord": {
+          "additionalProperties": false,
+          "description": "投票台账：从 VOTE_CAST 事件派生（跨轮票矩阵）。",
+          "properties": {
+            "derived_by": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Derived By"
+            },
+            "game_id": {
+              "title": "Game Id",
+              "type": "string"
+            },
+            "is_revote": {
+              "default": false,
+              "title": "Is Revote",
+              "type": "boolean"
+            },
+            "is_tie_candidate_vote": {
+              "default": false,
+              "title": "Is Tie Candidate Vote",
+              "type": "boolean"
+            },
+            "phase": {
+              "$ref": "#/$defs/Phase"
+            },
+            "record_id": {
+              "title": "Record Id",
+              "type": "string"
+            },
+            "round": {
+              "title": "Round",
+              "type": "integer"
+            },
+            "source_event_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Source Event Id"
+            },
+            "stage": {
+              "default": "primary",
+              "title": "Stage",
+              "type": "string"
+            },
+            "target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Target"
+            },
+            "voter": {
+              "title": "Voter",
+              "type": "string"
+            }
+          },
+          "required": [
+            "record_id",
+            "game_id",
+            "round",
+            "phase",
+            "voter"
+          ],
+          "title": "VoteRecord",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "allowed_actions": {
+          "items": {
+            "$ref": "#/$defs/ActionType"
+          },
+          "title": "Allowed Actions",
+          "type": "array"
+        },
+        "belief_state": {
+          "additionalProperties": true,
+          "title": "Belief State",
+          "type": "object"
+        },
+        "belief_top_suspects": {
+          "items": {},
+          "title": "Belief Top Suspects",
+          "type": "array"
+        },
+        "claim_records": {
+          "items": {
+            "$ref": "#/$defs/ClaimRecord"
+          },
+          "title": "Claim Records",
+          "type": "array"
+        },
+        "compressed_context": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Compressed Context"
+        },
+        "current_round_events": {
+          "items": {
+            "$ref": "#/$defs/PublicEvent"
+          },
+          "title": "Current Round Events",
+          "type": "array"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "is_secondary_stage": {
+          "default": false,
+          "title": "Is Secondary Stage",
+          "type": "boolean"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "previous_vote_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Previous Vote Summary",
+          "type": "object"
+        },
+        "private_events": {
+          "items": {
+            "$ref": "#/$defs/PrivateEvent"
+          },
+          "title": "Private Events",
+          "type": "array"
+        },
+        "public_events": {
+          "items": {
+            "$ref": "#/$defs/PublicEvent"
+          },
+          "title": "Public Events",
+          "type": "array"
+        },
+        "public_memory_summary": {
+          "items": {},
+          "title": "Public Memory Summary",
+          "type": "array"
+        },
+        "recent_public_events": {
+          "items": {
+            "$ref": "#/$defs/PublicEvent"
+          },
+          "title": "Recent Public Events",
+          "type": "array"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "rule_hints": {
+          "additionalProperties": true,
+          "title": "Rule Hints",
+          "type": "object"
+        },
+        "secondary_stage_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Secondary Stage Type"
+        },
+        "strategy_memory": {
+          "items": {},
+          "title": "Strategy Memory",
+          "type": "array"
+        },
+        "tie_candidates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tie Candidates",
+          "type": "array"
+        },
+        "visible_players": {
+          "items": {
+            "$ref": "#/$defs/VisiblePlayer"
+          },
+          "title": "Visible Players",
+          "type": "array"
+        },
+        "vote_records": {
+          "items": {
+            "$ref": "#/$defs/VoteRecord"
+          },
+          "title": "Vote Records",
+          "type": "array"
+        }
+      },
+      "required": [
+        "game_id",
+        "agent_id",
+        "role",
+        "round",
+        "phase"
+      ],
+      "title": "AgentContext",
+      "type": "object"
+    },
+    "AgentDecisionTrace": {
+      "$defs": {
+        "DecisionQualityFlags": {
+          "additionalProperties": false,
+          "description": "决策质量标签（学习器要的明确标签，取代模糊 dict）。",
+          "properties": {
+            "belief_override": {
+              "default": false,
+              "title": "Belief Override",
+              "type": "boolean"
+            },
+            "cot_leaked": {
+              "default": false,
+              "title": "Cot Leaked",
+              "type": "boolean"
+            },
+            "deviation_taken": {
+              "default": false,
+              "title": "Deviation Taken",
+              "type": "boolean"
+            },
+            "fallback_used": {
+              "default": false,
+              "title": "Fallback Used",
+              "type": "boolean"
+            },
+            "harmful_override": {
+              "default": false,
+              "title": "Harmful Override",
+              "type": "boolean"
+            },
+            "illegal_action": {
+              "default": false,
+              "title": "Illegal Action",
+              "type": "boolean"
+            },
+            "role_leaked": {
+              "default": false,
+              "title": "Role Leaked",
+              "type": "boolean"
+            }
+          },
+          "title": "DecisionQualityFlags",
+          "type": "object"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "agent_version": {
+          "title": "Agent Version",
+          "type": "string"
+        },
+        "context_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Context Ref"
+        },
+        "decision_output": {
+          "additionalProperties": true,
+          "title": "Decision Output",
+          "type": "object"
+        },
+        "decision_quality_flags": {
+          "additionalProperties": true,
+          "title": "Decision Quality Flags",
+          "type": "object"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "input_summary": {
+          "additionalProperties": true,
+          "title": "Input Summary",
+          "type": "object"
+        },
+        "model_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Name"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "prompt_version_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Version Id"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "run_config_snapshot_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Run Config Snapshot Id"
+        },
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "trace_id": {
+          "title": "Trace Id",
+          "type": "string"
+        },
+        "typed_decision_quality_flags": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DecisionQualityFlags"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "trace_id",
+        "game_id",
+        "round",
+        "phase",
+        "agent_id",
+        "role",
+        "agent_version"
+      ],
+      "title": "AgentDecisionTrace",
+      "type": "object"
+    },
+    "AgentTuningTrace": {
+      "$defs": {
+        "PromptChange": {
+          "additionalProperties": false,
+          "properties": {
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "content"
+          ],
+          "title": "PromptChange",
+          "type": "object"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "after_metrics": {
+          "additionalProperties": true,
+          "title": "After Metrics",
+          "type": "object"
+        },
+        "before_metrics": {
+          "additionalProperties": true,
+          "title": "Before Metrics",
+          "type": "object"
+        },
+        "change_summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Change Summary"
+        },
+        "from_prompt_version": {
+          "title": "From Prompt Version",
+          "type": "string"
+        },
+        "prompt_changes": {
+          "items": {
+            "$ref": "#/$defs/PromptChange"
+          },
+          "title": "Prompt Changes",
+          "type": "array"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "to_prompt_version": {
+          "title": "To Prompt Version",
+          "type": "string"
+        },
+        "tradeoff": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tradeoff"
+        },
+        "trigger_bad_cases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Trigger Bad Cases",
+          "type": "array"
+        },
+        "tuning_trace_id": {
+          "title": "Tuning Trace Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tuning_trace_id",
+        "role",
+        "from_prompt_version",
+        "to_prompt_version"
+      ],
+      "title": "AgentTuningTrace",
+      "type": "object"
+    },
+    "BadCaseReport": {
+      "$defs": {
+        "EvidenceEvent": {
+          "additionalProperties": false,
+          "properties": {
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "event_id": {
+              "title": "Event Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "event_id",
+            "description"
+          ],
+          "title": "EvidenceEvent",
+          "type": "object"
+        },
+        "FailureCategory": {
+          "description": "失败分类 taxonomy（四层）—— BadCase 可学习的前提：先有明确分类，再谈归因。",
+          "enum": [
+            "system_error",
+            "phase_stuck",
+            "illegal_action_penetration",
+            "context_leak",
+            "missing_private_info",
+            "json_parse_error",
+            "canonicalizer_error",
+            "fallback_overused",
+            "role_leak",
+            "meta_ai_leak",
+            "cot_leak",
+            "context_truncation_error",
+            "timeout_or_rate_limit",
+            "bad_vote",
+            "late_claim",
+            "false_claim_failed",
+            "over_defense",
+            "harmful_bussing",
+            "missed_save",
+            "wrong_poison",
+            "hunter_wrong_shot",
+            "belief_update_error",
+            "harmful_belief_override"
+          ],
+          "title": "FailureCategory",
+          "type": "string"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "affected_metrics": {
+          "additionalProperties": true,
+          "title": "Affected Metrics",
+          "type": "object"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "agent_version": {
+          "title": "Agent Version",
+          "type": "string"
+        },
+        "bad_case_id": {
+          "title": "Bad Case Id",
+          "type": "string"
+        },
+        "case_type": {
+          "title": "Case Type",
+          "type": "string"
+        },
+        "contributing_factors": {
+          "items": {
+            "$ref": "#/$defs/FailureCategory"
+          },
+          "title": "Contributing Factors",
+          "type": "array"
+        },
+        "evidence_events": {
+          "items": {
+            "$ref": "#/$defs/EvidenceEvent"
+          },
+          "title": "Evidence Events",
+          "type": "array"
+        },
+        "fixed_by_prompt_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fixed By Prompt Version"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "primary_failure_category": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FailureCategory"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "problem": {
+          "title": "Problem",
+          "type": "string"
+        },
+        "prompt_version_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Version Id"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "root_cause": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Root Cause"
+        },
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "severity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Severity"
+        },
+        "source_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Type"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status"
+        },
+        "suggested_fix": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Suggested Fix"
+        }
+      },
+      "required": [
+        "bad_case_id",
+        "game_id",
+        "agent_id",
+        "role",
+        "agent_version",
+        "case_type",
+        "problem"
+      ],
+      "title": "BadCaseReport",
+      "type": "object"
+    },
+    "BatchRunReport": {
+      "$defs": {
+        "GameRunResult": {
+          "additionalProperties": false,
+          "description": "单局运行结果——失败定位三件套：error_phase / error_actor / error_type。",
+          "properties": {
+            "error_actor": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Error Actor"
+            },
+            "error_message": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Error Message"
+            },
+            "error_phase": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Phase"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "error_type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Error Type"
+            },
+            "game_id": {
+              "title": "Game Id",
+              "type": "string"
+            },
+            "rounds": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rounds"
+            },
+            "run_config_snapshot": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/RunConfigSnapshot"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "runtime_ms": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Runtime Ms"
+            },
+            "schema_version": {
+              "default": "1.0",
+              "title": "Schema Version",
+              "type": "string"
+            },
+            "status": {
+              "default": "completed",
+              "title": "Status",
+              "type": "string"
+            },
+            "winner": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Winner"
+            }
+          },
+          "required": [
+            "game_id"
+          ],
+          "title": "GameRunResult",
+          "type": "object"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "RunConfigSnapshot": {
+          "additionalProperties": false,
+          "description": "一局/一批的完整运行配置快照——解决\"为什么这次和上次不一样\"。",
+          "properties": {
+            "agent_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Agent Version"
+            },
+            "belief_rules_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Belief Rules Version"
+            },
+            "belief_update_policy_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Belief Update Policy Id"
+            },
+            "contract_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Contract Version"
+            },
+            "created_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Created At"
+            },
+            "endpoint_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Endpoint Id"
+            },
+            "fallback_policy_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Fallback Policy Id"
+            },
+            "game_config_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Game Config Id"
+            },
+            "max_tokens": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Max Tokens"
+            },
+            "model_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Model Id"
+            },
+            "model_provider": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Model Provider"
+            },
+            "normalization_method": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Normalization Method"
+            },
+            "prompt_version_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Prompt Version Id"
+            },
+            "retry_policy_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry Policy Id"
+            },
+            "rules_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rules Version"
+            },
+            "seed": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Seed"
+            },
+            "strategy_profile_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Strategy Profile Id"
+            },
+            "temperature": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Temperature"
+            },
+            "timeout_seconds": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Timeout Seconds"
+            },
+            "top_p": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Top P"
+            }
+          },
+          "title": "RunConfigSnapshot",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "description": "批量压测报告——failed_game_ids/representative_failed_runs 让失败可点回。",
+      "properties": {
+        "avg_runtime_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Avg Runtime Ms"
+        },
+        "completed": {
+          "default": 0,
+          "title": "Completed",
+          "type": "integer"
+        },
+        "error_count": {
+          "default": 0,
+          "title": "Error Count",
+          "type": "integer"
+        },
+        "failed": {
+          "default": 0,
+          "title": "Failed",
+          "type": "integer"
+        },
+        "failed_game_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failed Game Ids",
+          "type": "array"
+        },
+        "representative_failed_runs": {
+          "items": {
+            "$ref": "#/$defs/GameRunResult"
+          },
+          "title": "Representative Failed Runs",
+          "type": "array"
+        },
+        "run_config_snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RunConfigSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "total": {
+          "default": 0,
+          "title": "Total",
+          "type": "integer"
+        },
+        "winner_distribution": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Winner Distribution",
+          "type": "object"
+        }
+      },
+      "title": "BatchRunReport",
+      "type": "object"
+    },
+    "BeliefCurvePoint": {
+      "$defs": {
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "信念曲线采样点（从 BeliefState 快照派生，给前端 belief curve）。",
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "derived_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Derived By"
+        },
+        "phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "target_player_id": {
+          "title": "Target Player Id",
+          "type": "string"
+        },
+        "werewolf_prob": {
+          "default": 0.0,
+          "title": "Werewolf Prob",
+          "type": "number"
+        }
+      },
+      "required": [
+        "round",
+        "agent_id",
+        "target_player_id"
+      ],
+      "title": "BeliefCurvePoint",
+      "type": "object"
+    },
+    "BeliefState": {
+      "$defs": {
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "RoleBelief": {
+          "additionalProperties": false,
+          "properties": {
+            "hunter": {
+              "default": 0.0,
+              "title": "Hunter",
+              "type": "number"
+            },
+            "lock_reason": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Lock Reason"
+            },
+            "locked": {
+              "default": false,
+              "title": "Locked",
+              "type": "boolean"
+            },
+            "seer": {
+              "default": 0.0,
+              "title": "Seer",
+              "type": "number"
+            },
+            "villager": {
+              "default": 0.0,
+              "title": "Villager",
+              "type": "number"
+            },
+            "werewolf": {
+              "default": 0.0,
+              "title": "Werewolf",
+              "type": "number"
+            },
+            "witch": {
+              "default": 0.0,
+              "title": "Witch",
+              "type": "number"
+            }
+          },
+          "title": "RoleBelief",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "beliefs": {
+          "additionalProperties": {
+            "$ref": "#/$defs/RoleBelief"
+          },
+          "title": "Beliefs",
+          "type": "object"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "is_shadow": {
+          "default": false,
+          "title": "Is Shadow",
+          "type": "boolean"
+        },
+        "last_updated_event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Updated Event Id"
+        },
+        "phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "round": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Round"
+        }
+      },
+      "required": [
+        "game_id",
+        "agent_id"
+      ],
+      "title": "BeliefState",
+      "type": "object"
+    },
+    "BeliefUpdateBatch": {
+      "$defs": {
+        "BeliefUpdateDelta": {
+          "additionalProperties": false,
+          "description": "单条信念变化（哪个事件把谁的哪种角色概率改了多少、哪条规则、是否锁定）。",
+          "properties": {
+            "delta": {
+              "default": 0.0,
+              "title": "Delta",
+              "type": "number"
+            },
+            "prob_after": {
+              "default": 0.0,
+              "title": "Prob After",
+              "type": "number"
+            },
+            "prob_before": {
+              "default": 0.0,
+              "title": "Prob Before",
+              "type": "number"
+            },
+            "reason": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Reason"
+            },
+            "role": {
+              "$ref": "#/$defs/Role"
+            },
+            "rule_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rule Id"
+            },
+            "target_player_id": {
+              "title": "Target Player Id",
+              "type": "string"
+            },
+            "was_locked": {
+              "default": false,
+              "title": "Was Locked",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "target_player_id",
+            "role"
+          ],
+          "title": "BeliefUpdateDelta",
+          "type": "object"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "一个 trigger_event 触发的一批 delta（一事件可影响多人多角色）。\n\n未触发变化时也显式记录（no_update_reason），不能用\"没记录\"表示\"没变化\"。",
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "belief_update_id": {
+          "title": "Belief Update Id",
+          "type": "string"
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Created At"
+        },
+        "deltas": {
+          "items": {
+            "$ref": "#/$defs/BeliefUpdateDelta"
+          },
+          "title": "Deltas",
+          "type": "array"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "no_update_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "No Update Reason"
+        },
+        "phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "round": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Round"
+        },
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "trigger_event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trigger Event Id"
+        }
+      },
+      "required": [
+        "belief_update_id",
+        "game_id",
+        "agent_id"
+      ],
+      "title": "BeliefUpdateBatch",
+      "type": "object"
+    },
+    "BeliefUpdateDelta": {
+      "$defs": {
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "单条信念变化（哪个事件把谁的哪种角色概率改了多少、哪条规则、是否锁定）。",
+      "properties": {
+        "delta": {
+          "default": 0.0,
+          "title": "Delta",
+          "type": "number"
+        },
+        "prob_after": {
+          "default": 0.0,
+          "title": "Prob After",
+          "type": "number"
+        },
+        "prob_before": {
+          "default": 0.0,
+          "title": "Prob Before",
+          "type": "number"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "rule_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Id"
+        },
+        "target_player_id": {
+          "title": "Target Player Id",
+          "type": "string"
+        },
+        "was_locked": {
+          "default": false,
+          "title": "Was Locked",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "target_player_id",
+        "role"
+      ],
+      "title": "BeliefUpdateDelta",
+      "type": "object"
+    },
+    "ClaimRecord": {
+      "$defs": {
+        "ClaimedAlignment": {
+          "enum": [
+            "werewolf",
+            "villager",
+            "unknown"
+          ],
+          "title": "ClaimedAlignment",
+          "type": "string"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "跳身份/查杀台账：从 SPEECH（含 claim_result）事件派生。",
+      "properties": {
+        "actor": {
+          "title": "Actor",
+          "type": "string"
+        },
+        "claim_target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Claim Target"
+        },
+        "claimed_alignment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClaimedAlignment"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "claimed_role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Role"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "derived_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Derived By"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "is_counter_claim": {
+          "default": false,
+          "title": "Is Counter Claim",
+          "type": "boolean"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "source_event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Event Id"
+        }
+      },
+      "required": [
+        "record_id",
+        "game_id",
+        "round",
+        "phase",
+        "actor"
+      ],
+      "title": "ClaimRecord",
+      "type": "object"
+    },
+    "ClaimResult": {
+      "$defs": {
+        "ClaimedAlignment": {
+          "enum": [
+            "werewolf",
+            "villager",
+            "unknown"
+          ],
+          "title": "ClaimedAlignment",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "claimed_alignment": {
+          "$ref": "#/$defs/ClaimedAlignment"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target",
+        "claimed_alignment"
+      ],
+      "title": "ClaimResult",
+      "type": "object"
+    },
+    "ContextBudgetConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "max_belief_top_suspects": {
+          "default": 3,
+          "title": "Max Belief Top Suspects",
+          "type": "integer"
+        },
+        "max_current_day_speeches_raw": {
+          "default": 9,
+          "title": "Max Current Day Speeches Raw",
+          "type": "integer"
+        },
+        "max_historical_speech_raw": {
+          "default": 0,
+          "title": "Max Historical Speech Raw",
+          "type": "integer"
+        },
+        "max_input_tokens_per_agent": {
+          "default": 4000,
+          "title": "Max Input Tokens Per Agent",
+          "type": "integer"
+        },
+        "max_recent_public_events": {
+          "default": 20,
+          "title": "Max Recent Public Events",
+          "type": "integer"
+        },
+        "max_strategy_memory_items": {
+          "default": 3,
+          "title": "Max Strategy Memory Items",
+          "type": "integer"
+        }
+      },
+      "title": "ContextBudgetConfig",
+      "type": "object"
+    },
+    "ContextSnapshot": {
+      "$defs": {
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "某 agent 某回合实际收到的 AgentContext 忠实快照（可见性=evaluator/debug，不进 AgentContext）。",
+      "properties": {
+        "agent_context_json": {
+          "additionalProperties": true,
+          "title": "Agent Context Json",
+          "type": "object"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "agent_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Version"
+        },
+        "context_id": {
+          "title": "Context Id",
+          "type": "string"
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Created At"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "prompt_version_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Version Id"
+        },
+        "rendered_prompt_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rendered Prompt Ref"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "context_id",
+        "game_id",
+        "agent_id",
+        "round",
+        "phase"
+      ],
+      "title": "ContextSnapshot",
+      "type": "object"
+    },
+    "ContractModel": {
+      "additionalProperties": false,
+      "properties": {},
+      "title": "ContractModel",
+      "type": "object"
+    },
+    "CreateGameResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "game_id",
+        "status"
+      ],
+      "title": "CreateGameResponse",
+      "type": "object"
+    },
+    "DecisionQualityFlags": {
+      "additionalProperties": false,
+      "description": "决策质量标签（学习器要的明确标签，取代模糊 dict）。",
+      "properties": {
+        "belief_override": {
+          "default": false,
+          "title": "Belief Override",
+          "type": "boolean"
+        },
+        "cot_leaked": {
+          "default": false,
+          "title": "Cot Leaked",
+          "type": "boolean"
+        },
+        "deviation_taken": {
+          "default": false,
+          "title": "Deviation Taken",
+          "type": "boolean"
+        },
+        "fallback_used": {
+          "default": false,
+          "title": "Fallback Used",
+          "type": "boolean"
+        },
+        "harmful_override": {
+          "default": false,
+          "title": "Harmful Override",
+          "type": "boolean"
+        },
+        "illegal_action": {
+          "default": false,
+          "title": "Illegal Action",
+          "type": "boolean"
+        },
+        "role_leaked": {
+          "default": false,
+          "title": "Role Leaked",
+          "type": "boolean"
+        }
+      },
+      "title": "DecisionQualityFlags",
+      "type": "object"
+    },
+    "Deviation": {
+      "additionalProperties": false,
+      "properties": {
+        "belief_recommended_target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Belief Recommended Target"
+        },
+        "deviation_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deviation Type"
+        },
+        "is_deviation_from_belief": {
+          "default": false,
+          "title": "Is Deviation From Belief",
+          "type": "boolean"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "selected_target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Target"
+        }
+      },
+      "title": "Deviation",
+      "type": "object"
+    },
+    "DeviationEvent": {
+      "$defs": {
+        "DeviationOutcome": {
+          "enum": [
+            "correct",
+            "incorrect",
+            "neutral"
+          ],
+          "title": "DeviationOutcome",
+          "type": "string"
+        },
+        "EventType": {
+          "enum": [
+            "phase_started",
+            "role_assigned",
+            "wolf_nomination",
+            "night_kill_announced",
+            "seer_check_result",
+            "witch_kill_target_info",
+            "witch_save",
+            "witch_poison",
+            "day_announcement",
+            "speech",
+            "vote_cast",
+            "tie_detected",
+            "no_exile_due_to_second_tie",
+            "exile",
+            "last_words",
+            "hunter_shot",
+            "death_confirmed",
+            "win_check",
+            "game_over",
+            "agent_action",
+            "llm_call",
+            "rule_validation",
+            "fallback_used",
+            "belief_snapshot",
+            "belief_deviation",
+            "action_canonicalized",
+            "action_guard_triggered",
+            "context_assembled",
+            "prompt_version_used",
+            "agent_decision_trace",
+            "fact_stream_summary"
+          ],
+          "title": "EventType",
+          "type": "string"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "belief_recommended_target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Belief Recommended Target"
+        },
+        "deviation_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deviation Type"
+        },
+        "event_type": {
+          "$ref": "#/$defs/EventType",
+          "default": "belief_deviation"
+        },
+        "game_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Game Id"
+        },
+        "outcome": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DeviationOutcome"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "round": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Round"
+        },
+        "selected_target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Target"
+        }
+      },
+      "required": [
+        "agent_id",
+        "phase"
+      ],
+      "title": "DeviationEvent",
+      "type": "object"
+    },
+    "EvaluationReport": {
+      "$defs": {
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "KeyTurningPoint": {
+          "additionalProperties": false,
+          "properties": {
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "phase": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Phase"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "title": "Phase"
+            },
+            "round": {
+              "title": "Round",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "round",
+            "phase",
+            "description"
+          ],
+          "title": "KeyTurningPoint",
+          "type": "object"
+        },
+        "OutcomeAttribution": {
+          "additionalProperties": false,
+          "description": "分层胜负/失败归因：game/camp/agent/role。",
+          "properties": {
+            "agent_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Agent Id"
+            },
+            "camp": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Camp"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "description": {
+              "default": "",
+              "title": "Description",
+              "type": "string"
+            },
+            "key_event_ids": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Key Event Ids",
+              "type": "array"
+            },
+            "role": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Role"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "scope": {
+              "default": "game",
+              "title": "Scope",
+              "type": "string"
+            }
+          },
+          "title": "OutcomeAttribution",
+          "type": "object"
+        },
+        "PerAgentMetric": {
+          "additionalProperties": false,
+          "properties": {
+            "agent_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Agent Version"
+            },
+            "belief_override_count": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Belief Override Count"
+            },
+            "camp": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Camp"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "fallback_count": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Fallback Count"
+            },
+            "final_belief_accuracy": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Final Belief Accuracy"
+            },
+            "harmful_override_count": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Harmful Override Count"
+            },
+            "model_name": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Model Name"
+            },
+            "prompt_version_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Prompt Version Id"
+            },
+            "role": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Role"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "survived": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Survived"
+            },
+            "vote_accuracy": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Vote Accuracy"
+            }
+          },
+          "title": "PerAgentMetric",
+          "type": "object"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "key_turning_points": {
+          "items": {
+            "$ref": "#/$defs/KeyTurningPoint"
+          },
+          "title": "Key Turning Points",
+          "type": "array"
+        },
+        "metrics": {
+          "additionalProperties": true,
+          "title": "Metrics",
+          "type": "object"
+        },
+        "outcome_attribution": {
+          "items": {
+            "$ref": "#/$defs/OutcomeAttribution"
+          },
+          "title": "Outcome Attribution",
+          "type": "array"
+        },
+        "per_agent_metrics": {
+          "additionalProperties": {
+            "$ref": "#/$defs/PerAgentMetric"
+          },
+          "title": "Per Agent Metrics",
+          "type": "object"
+        },
+        "rounds": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounds"
+        },
+        "winner": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Winner"
+        }
+      },
+      "required": [
+        "game_id"
+      ],
+      "title": "EvaluationReport",
+      "type": "object"
+    },
+    "EvidenceEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "description"
+      ],
+      "title": "EvidenceEvent",
+      "type": "object"
+    },
+    "FactStreamSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "default": "fact_stream_summary",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "facts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Facts",
+          "type": "array"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "round"
+      ],
+      "title": "FactStreamSummary",
+      "type": "object"
+    },
+    "FewShotCase": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_action": {
+          "title": "Expected Action",
+          "type": "string"
+        },
+        "situation": {
+          "title": "Situation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "situation",
+        "expected_action"
+      ],
+      "title": "FewShotCase",
+      "type": "object"
+    },
+    "GameConfig": {
+      "$defs": {
+        "GameRules": {
+          "additionalProperties": false,
+          "properties": {
+            "hunter_can_shoot_after_poisoned": {
+              "default": false,
+              "title": "Hunter Can Shoot After Poisoned",
+              "type": "boolean"
+            },
+            "hunter_enabled": {
+              "default": true,
+              "title": "Hunter Enabled",
+              "type": "boolean"
+            },
+            "last_words_enabled": {
+              "default": true,
+              "title": "Last Words Enabled",
+              "type": "boolean"
+            },
+            "second_tie_result": {
+              "default": "no_exile_go_night",
+              "title": "Second Tie Result",
+              "type": "string"
+            },
+            "sheriff_enabled": {
+              "default": false,
+              "title": "Sheriff Enabled",
+              "type": "boolean"
+            },
+            "tie_break_enabled": {
+              "default": true,
+              "title": "Tie Break Enabled",
+              "type": "boolean"
+            },
+            "tie_discussion_round_limit": {
+              "default": 1,
+              "title": "Tie Discussion Round Limit",
+              "type": "integer"
+            },
+            "tie_revote_target_scope": {
+              "default": "tie_candidates_only",
+              "title": "Tie Revote Target Scope",
+              "type": "string"
+            },
+            "witch_can_save_and_poison_same_night": {
+              "default": false,
+              "title": "Witch Can Save And Poison Same Night",
+              "type": "boolean"
+            },
+            "witch_knows_kill_target": {
+              "default": true,
+              "title": "Witch Knows Kill Target",
+              "type": "boolean"
+            },
+            "wolf_coordination_mode": {
+              "default": "nomination_random_tiebreak",
+              "title": "Wolf Coordination Mode",
+              "type": "string"
+            }
+          },
+          "title": "GameRules",
+          "type": "object"
+        },
+        "ModelConfig": {
+          "additionalProperties": false,
+          "properties": {
+            "endpoint_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Endpoint Id"
+            },
+            "model_display_name": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Model Display Name"
+            },
+            "model_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Model Id"
+            },
+            "provider": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Provider"
+            },
+            "temperature": {
+              "default": 0.7,
+              "title": "Temperature",
+              "type": "number"
+            }
+          },
+          "title": "ModelConfig",
+          "type": "object"
+        },
+        "RoleCounts": {
+          "additionalProperties": false,
+          "properties": {
+            "hunter": {
+              "default": 0,
+              "title": "Hunter",
+              "type": "integer"
+            },
+            "seer": {
+              "default": 0,
+              "title": "Seer",
+              "type": "integer"
+            },
+            "villager": {
+              "default": 0,
+              "title": "Villager",
+              "type": "integer"
+            },
+            "werewolf": {
+              "default": 0,
+              "title": "Werewolf",
+              "type": "integer"
+            },
+            "witch": {
+              "default": 0,
+              "title": "Witch",
+              "type": "integer"
+            }
+          },
+          "title": "RoleCounts",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "agent_version": {
+          "default": "v1",
+          "title": "Agent Version",
+          "type": "string"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "max_rounds": {
+          "default": 8,
+          "title": "Max Rounds",
+          "type": "integer"
+        },
+        "mode": {
+          "default": "ai_vs_ai",
+          "title": "Mode",
+          "type": "string"
+        },
+        "model_config": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ModelConfig"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "player_count": {
+          "title": "Player Count",
+          "type": "integer"
+        },
+        "roles": {
+          "$ref": "#/$defs/RoleCounts"
+        },
+        "rules": {
+          "$ref": "#/$defs/GameRules"
+        }
+      },
+      "required": [
+        "game_id",
+        "player_count",
+        "roles"
+      ],
+      "title": "GameConfig",
+      "type": "object"
+    },
+    "GameEvent": {
+      "$defs": {
+        "EventType": {
+          "enum": [
+            "phase_started",
+            "role_assigned",
+            "wolf_nomination",
+            "night_kill_announced",
+            "seer_check_result",
+            "witch_kill_target_info",
+            "witch_save",
+            "witch_poison",
+            "day_announcement",
+            "speech",
+            "vote_cast",
+            "tie_detected",
+            "no_exile_due_to_second_tie",
+            "exile",
+            "last_words",
+            "hunter_shot",
+            "death_confirmed",
+            "win_check",
+            "game_over",
+            "agent_action",
+            "llm_call",
+            "rule_validation",
+            "fallback_used",
+            "belief_snapshot",
+            "belief_deviation",
+            "action_canonicalized",
+            "action_guard_triggered",
+            "context_assembled",
+            "prompt_version_used",
+            "agent_decision_trace",
+            "fact_stream_summary"
+          ],
+          "title": "EventType",
+          "type": "string"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Visibility": {
+          "enum": [
+            "public",
+            "private_to_seer",
+            "private_to_witch",
+            "private_to_wolves"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actor"
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Created At"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_type": {
+          "$ref": "#/$defs/EventType"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "payload": {
+          "additionalProperties": true,
+          "title": "Payload",
+          "type": "object"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "visibility": {
+          "$ref": "#/$defs/Visibility",
+          "default": "public"
+        }
+      },
+      "required": [
+        "event_id",
+        "game_id",
+        "round",
+        "phase",
+        "event_type"
+      ],
+      "title": "GameEvent",
+      "type": "object"
+    },
+    "GameRules": {
+      "additionalProperties": false,
+      "properties": {
+        "hunter_can_shoot_after_poisoned": {
+          "default": false,
+          "title": "Hunter Can Shoot After Poisoned",
+          "type": "boolean"
+        },
+        "hunter_enabled": {
+          "default": true,
+          "title": "Hunter Enabled",
+          "type": "boolean"
+        },
+        "last_words_enabled": {
+          "default": true,
+          "title": "Last Words Enabled",
+          "type": "boolean"
+        },
+        "second_tie_result": {
+          "default": "no_exile_go_night",
+          "title": "Second Tie Result",
+          "type": "string"
+        },
+        "sheriff_enabled": {
+          "default": false,
+          "title": "Sheriff Enabled",
+          "type": "boolean"
+        },
+        "tie_break_enabled": {
+          "default": true,
+          "title": "Tie Break Enabled",
+          "type": "boolean"
+        },
+        "tie_discussion_round_limit": {
+          "default": 1,
+          "title": "Tie Discussion Round Limit",
+          "type": "integer"
+        },
+        "tie_revote_target_scope": {
+          "default": "tie_candidates_only",
+          "title": "Tie Revote Target Scope",
+          "type": "string"
+        },
+        "witch_can_save_and_poison_same_night": {
+          "default": false,
+          "title": "Witch Can Save And Poison Same Night",
+          "type": "boolean"
+        },
+        "witch_knows_kill_target": {
+          "default": true,
+          "title": "Witch Knows Kill Target",
+          "type": "boolean"
+        },
+        "wolf_coordination_mode": {
+          "default": "nomination_random_tiebreak",
+          "title": "Wolf Coordination Mode",
+          "type": "string"
+        }
+      },
+      "title": "GameRules",
+      "type": "object"
+    },
+    "GameRunResult": {
+      "$defs": {
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "RunConfigSnapshot": {
+          "additionalProperties": false,
+          "description": "一局/一批的完整运行配置快照——解决\"为什么这次和上次不一样\"。",
+          "properties": {
+            "agent_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Agent Version"
+            },
+            "belief_rules_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Belief Rules Version"
+            },
+            "belief_update_policy_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Belief Update Policy Id"
+            },
+            "contract_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Contract Version"
+            },
+            "created_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Created At"
+            },
+            "endpoint_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Endpoint Id"
+            },
+            "fallback_policy_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Fallback Policy Id"
+            },
+            "game_config_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Game Config Id"
+            },
+            "max_tokens": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Max Tokens"
+            },
+            "model_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Model Id"
+            },
+            "model_provider": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Model Provider"
+            },
+            "normalization_method": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Normalization Method"
+            },
+            "prompt_version_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Prompt Version Id"
+            },
+            "retry_policy_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Retry Policy Id"
+            },
+            "rules_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rules Version"
+            },
+            "seed": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Seed"
+            },
+            "strategy_profile_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Strategy Profile Id"
+            },
+            "temperature": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Temperature"
+            },
+            "timeout_seconds": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Timeout Seconds"
+            },
+            "top_p": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Top P"
+            }
+          },
+          "title": "RunConfigSnapshot",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "description": "单局运行结果——失败定位三件套：error_phase / error_actor / error_type。",
+      "properties": {
+        "error_actor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Actor"
+        },
+        "error_message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Message"
+        },
+        "error_phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "error_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Type"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "rounds": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounds"
+        },
+        "run_config_snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RunConfigSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "runtime_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Runtime Ms"
+        },
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "default": "completed",
+          "title": "Status",
+          "type": "string"
+        },
+        "winner": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Winner"
+        }
+      },
+      "required": [
+        "game_id"
+      ],
+      "title": "GameRunResult",
+      "type": "object"
+    },
+    "HunterState": {
+      "additionalProperties": false,
+      "properties": {
+        "can_shoot_after_poisoned": {
+          "default": false,
+          "title": "Can Shoot After Poisoned",
+          "type": "boolean"
+        },
+        "shot_used": {
+          "default": false,
+          "title": "Shot Used",
+          "type": "boolean"
+        }
+      },
+      "title": "HunterState",
+      "type": "object"
+    },
+    "KeyTurningPoint": {
+      "$defs": {
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Phase"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "round",
+        "phase",
+        "description"
+      ],
+      "title": "KeyTurningPoint",
+      "type": "object"
+    },
+    "LeaderboardResponse": {
+      "$defs": {
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "LeaderboardRow": {
+          "additionalProperties": false,
+          "properties": {
+            "agent_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Agent Version"
+            },
+            "camp": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Camp"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "fallback_rate": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Fallback Rate"
+            },
+            "harmful_override_rate": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Harmful Override Rate"
+            },
+            "matchup": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Matchup"
+            },
+            "model_name": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Model Name"
+            },
+            "prompt_version_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Prompt Version Id"
+            },
+            "role": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Role"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "vote_accuracy": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Vote Accuracy"
+            },
+            "win_rate": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Win Rate"
+            },
+            "wolf_survival_rate": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Wolf Survival Rate"
+            }
+          },
+          "title": "LeaderboardRow",
+          "type": "object"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/LeaderboardRow"
+          },
+          "title": "Rows",
+          "type": "array"
+        }
+      },
+      "title": "LeaderboardResponse",
+      "type": "object"
+    },
+    "LeaderboardRow": {
+      "$defs": {
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "agent_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Version"
+        },
+        "camp": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Camp"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fallback_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fallback Rate"
+        },
+        "harmful_override_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Harmful Override Rate"
+        },
+        "matchup": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matchup"
+        },
+        "model_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Name"
+        },
+        "prompt_version_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Version Id"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Role"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "vote_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vote Accuracy"
+        },
+        "win_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Win Rate"
+        },
+        "wolf_survival_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Wolf Survival Rate"
+        }
+      },
+      "title": "LeaderboardRow",
+      "type": "object"
+    },
+    "ModelConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "endpoint_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Endpoint Id"
+        },
+        "model_display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Display Name"
+        },
+        "model_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Id"
+        },
+        "provider": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider"
+        },
+        "temperature": {
+          "default": 0.7,
+          "title": "Temperature",
+          "type": "number"
+        }
+      },
+      "title": "ModelConfig",
+      "type": "object"
+    },
+    "NightState": {
+      "additionalProperties": false,
+      "properties": {
+        "kill_target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Kill Target"
+        },
+        "poison_target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Poison Target"
+        },
+        "saved_target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Saved Target"
+        },
+        "wolf_nominations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Wolf Nominations",
+          "type": "object"
+        }
+      },
+      "title": "NightState",
+      "type": "object"
+    },
+    "OutcomeAttribution": {
+      "$defs": {
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "分层胜负/失败归因：game/camp/agent/role。",
+      "properties": {
+        "agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Id"
+        },
+        "camp": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Camp"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "key_event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Key Event Ids",
+          "type": "array"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Role"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "scope": {
+          "default": "game",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "title": "OutcomeAttribution",
+      "type": "object"
+    },
+    "PerAgentMetric": {
+      "$defs": {
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "agent_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Version"
+        },
+        "belief_override_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Belief Override Count"
+        },
+        "camp": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Camp"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fallback_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fallback Count"
+        },
+        "final_belief_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Final Belief Accuracy"
+        },
+        "harmful_override_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Harmful Override Count"
+        },
+        "model_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Name"
+        },
+        "prompt_version_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Version Id"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Role"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "survived": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Survived"
+        },
+        "vote_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vote Accuracy"
+        }
+      },
+      "title": "PerAgentMetric",
+      "type": "object"
+    },
+    "PlayerFactSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "player_fact_summary": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Player Fact Summary",
+          "type": "object"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "round"
+      ],
+      "title": "PlayerFactSummary",
+      "type": "object"
+    },
+    "PlayerState": {
+      "$defs": {
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "PlayerStatus": {
+          "enum": [
+            "alive",
+            "dead"
+          ],
+          "title": "PlayerStatus",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "camp": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Camp"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "public_claim": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Public Claim"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "status": {
+          "$ref": "#/$defs/PlayerStatus",
+          "default": "alive"
+        },
+        "vote_weight": {
+          "default": 1.0,
+          "title": "Vote Weight",
+          "type": "number"
+        }
+      },
+      "required": [
+        "role"
+      ],
+      "title": "PlayerState",
+      "type": "object"
+    },
+    "PrivateEvent": {
+      "$defs": {
+        "EventType": {
+          "enum": [
+            "phase_started",
+            "role_assigned",
+            "wolf_nomination",
+            "night_kill_announced",
+            "seer_check_result",
+            "witch_kill_target_info",
+            "witch_save",
+            "witch_poison",
+            "day_announcement",
+            "speech",
+            "vote_cast",
+            "tie_detected",
+            "no_exile_due_to_second_tie",
+            "exile",
+            "last_words",
+            "hunter_shot",
+            "death_confirmed",
+            "win_check",
+            "game_over",
+            "agent_action",
+            "llm_call",
+            "rule_validation",
+            "fallback_used",
+            "belief_snapshot",
+            "belief_deviation",
+            "action_canonicalized",
+            "action_guard_triggered",
+            "context_assembled",
+            "prompt_version_used",
+            "agent_decision_trace",
+            "fact_stream_summary"
+          ],
+          "title": "EventType",
+          "type": "string"
+        },
+        "Visibility": {
+          "enum": [
+            "public",
+            "private_to_seer",
+            "private_to_witch",
+            "private_to_wolves"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "$ref": "#/$defs/EventType"
+        },
+        "result": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Result"
+        },
+        "round": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Round"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "teammates": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Teammates"
+        },
+        "visibility": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Visibility"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "event_type"
+      ],
+      "title": "PrivateEvent",
+      "type": "object"
+    },
+    "PromptChange": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "title": "PromptChange",
+      "type": "object"
+    },
+    "PromptVersion": {
+      "$defs": {
+        "FewShotCase": {
+          "additionalProperties": false,
+          "properties": {
+            "expected_action": {
+              "title": "Expected Action",
+              "type": "string"
+            },
+            "situation": {
+              "title": "Situation",
+              "type": "string"
+            }
+          },
+          "required": [
+            "situation",
+            "expected_action"
+          ],
+          "title": "FewShotCase",
+          "type": "object"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "agent_version": {
+          "title": "Agent Version",
+          "type": "string"
+        },
+        "based_on": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Based On"
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Created At"
+        },
+        "derived_from": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Derived From"
+        },
+        "design_goal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Design Goal"
+        },
+        "few_shot_cases": {
+          "items": {
+            "$ref": "#/$defs/FewShotCase"
+          },
+          "title": "Few Shot Cases",
+          "type": "array"
+        },
+        "key_strategy_rules": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Key Strategy Rules",
+          "type": "array"
+        },
+        "known_risks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Known Risks",
+          "type": "array"
+        },
+        "model_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Name"
+        },
+        "prompt_version_id": {
+          "title": "Prompt Version Id",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        }
+      },
+      "required": [
+        "prompt_version_id",
+        "role",
+        "agent_version"
+      ],
+      "title": "PromptVersion",
+      "type": "object"
+    },
+    "PublicEvent": {
+      "$defs": {
+        "ClaimResult": {
+          "additionalProperties": false,
+          "properties": {
+            "claimed_alignment": {
+              "$ref": "#/$defs/ClaimedAlignment"
+            },
+            "target": {
+              "title": "Target",
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "claimed_alignment"
+          ],
+          "title": "ClaimResult",
+          "type": "object"
+        },
+        "ClaimedAlignment": {
+          "enum": [
+            "werewolf",
+            "villager",
+            "unknown"
+          ],
+          "title": "ClaimedAlignment",
+          "type": "string"
+        },
+        "EventType": {
+          "enum": [
+            "phase_started",
+            "role_assigned",
+            "wolf_nomination",
+            "night_kill_announced",
+            "seer_check_result",
+            "witch_kill_target_info",
+            "witch_save",
+            "witch_poison",
+            "day_announcement",
+            "speech",
+            "vote_cast",
+            "tie_detected",
+            "no_exile_due_to_second_tie",
+            "exile",
+            "last_words",
+            "hunter_shot",
+            "death_confirmed",
+            "win_check",
+            "game_over",
+            "agent_action",
+            "llm_call",
+            "rule_validation",
+            "fallback_used",
+            "belief_snapshot",
+            "belief_deviation",
+            "action_canonicalized",
+            "action_guard_triggered",
+            "context_assembled",
+            "prompt_version_used",
+            "agent_decision_trace",
+            "fact_stream_summary"
+          ],
+          "title": "EventType",
+          "type": "string"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actor"
+        },
+        "claim_result": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClaimResult"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_type": {
+          "$ref": "#/$defs/EventType"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "public_message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Public Message"
+        },
+        "role_claim": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Role"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        }
+      },
+      "required": [
+        "event_id",
+        "round",
+        "phase",
+        "event_type"
+      ],
+      "title": "PublicEvent",
+      "type": "object"
+    },
+    "ReplayData": {
+      "$defs": {
+        "BeliefCurvePoint": {
+          "additionalProperties": false,
+          "description": "信念曲线采样点（从 BeliefState 快照派生，给前端 belief curve）。",
+          "properties": {
+            "agent_id": {
+              "title": "Agent Id",
+              "type": "string"
+            },
+            "derived_by": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Derived By"
+            },
+            "phase": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Phase"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "round": {
+              "title": "Round",
+              "type": "integer"
+            },
+            "target_player_id": {
+              "title": "Target Player Id",
+              "type": "string"
+            },
+            "werewolf_prob": {
+              "default": 0.0,
+              "title": "Werewolf Prob",
+              "type": "number"
+            }
+          },
+          "required": [
+            "round",
+            "agent_id",
+            "target_player_id"
+          ],
+          "title": "BeliefCurvePoint",
+          "type": "object"
+        },
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "EventType": {
+          "enum": [
+            "phase_started",
+            "role_assigned",
+            "wolf_nomination",
+            "night_kill_announced",
+            "seer_check_result",
+            "witch_kill_target_info",
+            "witch_save",
+            "witch_poison",
+            "day_announcement",
+            "speech",
+            "vote_cast",
+            "tie_detected",
+            "no_exile_due_to_second_tie",
+            "exile",
+            "last_words",
+            "hunter_shot",
+            "death_confirmed",
+            "win_check",
+            "game_over",
+            "agent_action",
+            "llm_call",
+            "rule_validation",
+            "fallback_used",
+            "belief_snapshot",
+            "belief_deviation",
+            "action_canonicalized",
+            "action_guard_triggered",
+            "context_assembled",
+            "prompt_version_used",
+            "agent_decision_trace",
+            "fact_stream_summary"
+          ],
+          "title": "EventType",
+          "type": "string"
+        },
+        "GameEvent": {
+          "additionalProperties": false,
+          "properties": {
+            "actor": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Actor"
+            },
+            "created_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Created At"
+            },
+            "event_id": {
+              "title": "Event Id",
+              "type": "string"
+            },
+            "event_type": {
+              "$ref": "#/$defs/EventType"
+            },
+            "game_id": {
+              "title": "Game Id",
+              "type": "string"
+            },
+            "payload": {
+              "additionalProperties": true,
+              "title": "Payload",
+              "type": "object"
+            },
+            "phase": {
+              "$ref": "#/$defs/Phase"
+            },
+            "round": {
+              "title": "Round",
+              "type": "integer"
+            },
+            "target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Target"
+            },
+            "visibility": {
+              "$ref": "#/$defs/Visibility",
+              "default": "public"
+            }
+          },
+          "required": [
+            "event_id",
+            "game_id",
+            "round",
+            "phase",
+            "event_type"
+          ],
+          "title": "GameEvent",
+          "type": "object"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "PlayerStatus": {
+          "enum": [
+            "alive",
+            "dead"
+          ],
+          "title": "PlayerStatus",
+          "type": "string"
+        },
+        "ReplayPlayer": {
+          "additionalProperties": false,
+          "description": "上帝视角真身（仅 GAME_OVER 后生成；可见性=post_game_replay_visible，绝不进 AgentContext）。\n\n死因须可从 GameEvent 派生：夜刀→killer_camp=werewolf；女巫毒/猎枪→相邻事件取 actor；\n放逐→vote summary。保留 death_source_event_id 锁住来源（派生不变量）。",
+          "properties": {
+            "camp": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Camp"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "death_cause": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Death Cause"
+            },
+            "death_phase": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Phase"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "death_round": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Death Round"
+            },
+            "death_source_event_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Death Source Event Id"
+            },
+            "final_status": {
+              "$ref": "#/$defs/PlayerStatus",
+              "default": "alive"
+            },
+            "killer_agent_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Killer Agent Id"
+            },
+            "killer_camp": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Camp"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "player_id": {
+              "title": "Player Id",
+              "type": "string"
+            },
+            "role": {
+              "$ref": "#/$defs/Role"
+            },
+            "survived": {
+              "default": true,
+              "title": "Survived",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "player_id",
+            "role"
+          ],
+          "title": "ReplayPlayer",
+          "type": "object"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "Visibility": {
+          "enum": [
+            "public",
+            "private_to_seer",
+            "private_to_witch",
+            "private_to_wolves"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "bad_cases": {
+          "items": {},
+          "title": "Bad Cases",
+          "type": "array"
+        },
+        "belief_curves": {
+          "items": {},
+          "title": "Belief Curves",
+          "type": "array"
+        },
+        "deviation_points": {
+          "items": {},
+          "title": "Deviation Points",
+          "type": "array"
+        },
+        "evaluation_summary": {
+          "additionalProperties": true,
+          "title": "Evaluation Summary",
+          "type": "object"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/GameEvent"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "players": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Players",
+          "type": "array"
+        },
+        "timeline": {
+          "items": {},
+          "title": "Timeline",
+          "type": "array"
+        },
+        "typed_belief_curves": {
+          "items": {
+            "$ref": "#/$defs/BeliefCurvePoint"
+          },
+          "title": "Typed Belief Curves",
+          "type": "array"
+        },
+        "typed_players": {
+          "items": {
+            "$ref": "#/$defs/ReplayPlayer"
+          },
+          "title": "Typed Players",
+          "type": "array"
+        }
+      },
+      "required": [
+        "game_id"
+      ],
+      "title": "ReplayData",
+      "type": "object"
+    },
+    "ReplayPlayer": {
+      "$defs": {
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "PlayerStatus": {
+          "enum": [
+            "alive",
+            "dead"
+          ],
+          "title": "PlayerStatus",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "上帝视角真身（仅 GAME_OVER 后生成；可见性=post_game_replay_visible，绝不进 AgentContext）。\n\n死因须可从 GameEvent 派生：夜刀→killer_camp=werewolf；女巫毒/猎枪→相邻事件取 actor；\n放逐→vote summary。保留 death_source_event_id 锁住来源（派生不变量）。",
+      "properties": {
+        "camp": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Camp"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "death_cause": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Death Cause"
+        },
+        "death_phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "death_round": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Death Round"
+        },
+        "death_source_event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Death Source Event Id"
+        },
+        "final_status": {
+          "$ref": "#/$defs/PlayerStatus",
+          "default": "alive"
+        },
+        "killer_agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Killer Agent Id"
+        },
+        "killer_camp": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Camp"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "player_id": {
+          "title": "Player Id",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "survived": {
+          "default": true,
+          "title": "Survived",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "player_id",
+        "role"
+      ],
+      "title": "ReplayPlayer",
+      "type": "object"
+    },
+    "RoleBelief": {
+      "additionalProperties": false,
+      "properties": {
+        "hunter": {
+          "default": 0.0,
+          "title": "Hunter",
+          "type": "number"
+        },
+        "lock_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lock Reason"
+        },
+        "locked": {
+          "default": false,
+          "title": "Locked",
+          "type": "boolean"
+        },
+        "seer": {
+          "default": 0.0,
+          "title": "Seer",
+          "type": "number"
+        },
+        "villager": {
+          "default": 0.0,
+          "title": "Villager",
+          "type": "number"
+        },
+        "werewolf": {
+          "default": 0.0,
+          "title": "Werewolf",
+          "type": "number"
+        },
+        "witch": {
+          "default": 0.0,
+          "title": "Witch",
+          "type": "number"
+        }
+      },
+      "title": "RoleBelief",
+      "type": "object"
+    },
+    "RoleCounts": {
+      "additionalProperties": false,
+      "properties": {
+        "hunter": {
+          "default": 0,
+          "title": "Hunter",
+          "type": "integer"
+        },
+        "seer": {
+          "default": 0,
+          "title": "Seer",
+          "type": "integer"
+        },
+        "villager": {
+          "default": 0,
+          "title": "Villager",
+          "type": "integer"
+        },
+        "werewolf": {
+          "default": 0,
+          "title": "Werewolf",
+          "type": "integer"
+        },
+        "witch": {
+          "default": 0,
+          "title": "Witch",
+          "type": "integer"
+        }
+      },
+      "title": "RoleCounts",
+      "type": "object"
+    },
+    "RoundState": {
+      "additionalProperties": false,
+      "properties": {
+        "hunter_death_cause": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hunter Death Cause"
+        },
+        "is_secondary_stage": {
+          "default": false,
+          "title": "Is Secondary Stage",
+          "type": "boolean"
+        },
+        "last_exiled_player": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Exiled Player"
+        },
+        "last_words_done": {
+          "default": false,
+          "title": "Last Words Done",
+          "type": "boolean"
+        },
+        "previous_vote_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Previous Vote Summary",
+          "type": "object"
+        },
+        "tie_candidates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tie Candidates",
+          "type": "array"
+        },
+        "tie_vote_round": {
+          "default": 0,
+          "title": "Tie Vote Round",
+          "type": "integer"
+        }
+      },
+      "title": "RoundState",
+      "type": "object"
+    },
+    "RunConfigSnapshot": {
+      "additionalProperties": false,
+      "description": "一局/一批的完整运行配置快照——解决\"为什么这次和上次不一样\"。",
+      "properties": {
+        "agent_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Version"
+        },
+        "belief_rules_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Belief Rules Version"
+        },
+        "belief_update_policy_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Belief Update Policy Id"
+        },
+        "contract_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Contract Version"
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Created At"
+        },
+        "endpoint_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Endpoint Id"
+        },
+        "fallback_policy_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fallback Policy Id"
+        },
+        "game_config_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Game Config Id"
+        },
+        "max_tokens": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Tokens"
+        },
+        "model_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Id"
+        },
+        "model_provider": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Provider"
+        },
+        "normalization_method": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalization Method"
+        },
+        "prompt_version_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Version Id"
+        },
+        "retry_policy_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retry Policy Id"
+        },
+        "rules_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rules Version"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seed"
+        },
+        "strategy_profile_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Strategy Profile Id"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temperature"
+        },
+        "timeout_seconds": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timeout Seconds"
+        },
+        "top_p": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top P"
+        }
+      },
+      "title": "RunConfigSnapshot",
+      "type": "object"
+    },
+    "RunGameResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "winner": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Winner"
+        }
+      },
+      "required": [
+        "game_id",
+        "status"
+      ],
+      "title": "RunGameResponse",
+      "type": "object"
+    },
+    "RunStatus": {
+      "$defs": {
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "实时运行状态（并发压测 + 前端等待态）。",
+      "properties": {
+        "active_games": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Active Games"
+        },
+        "current_actor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Current Actor"
+        },
+        "current_phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fallback_count": {
+          "default": 0,
+          "title": "Fallback Count",
+          "type": "integer"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "max_concurrency": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Concurrency"
+        },
+        "progress": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Progress"
+        },
+        "queue_position": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Queue Position"
+        },
+        "retry_count": {
+          "default": 0,
+          "title": "Retry Count",
+          "type": "integer"
+        },
+        "status": {
+          "default": "queued",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "game_id"
+      ],
+      "title": "RunStatus",
+      "type": "object"
+    },
+    "StepGameResponse": {
+      "$defs": {
+        "EventType": {
+          "enum": [
+            "phase_started",
+            "role_assigned",
+            "wolf_nomination",
+            "night_kill_announced",
+            "seer_check_result",
+            "witch_kill_target_info",
+            "witch_save",
+            "witch_poison",
+            "day_announcement",
+            "speech",
+            "vote_cast",
+            "tie_detected",
+            "no_exile_due_to_second_tie",
+            "exile",
+            "last_words",
+            "hunter_shot",
+            "death_confirmed",
+            "win_check",
+            "game_over",
+            "agent_action",
+            "llm_call",
+            "rule_validation",
+            "fallback_used",
+            "belief_snapshot",
+            "belief_deviation",
+            "action_canonicalized",
+            "action_guard_triggered",
+            "context_assembled",
+            "prompt_version_used",
+            "agent_decision_trace",
+            "fact_stream_summary"
+          ],
+          "title": "EventType",
+          "type": "string"
+        },
+        "GameEvent": {
+          "additionalProperties": false,
+          "properties": {
+            "actor": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Actor"
+            },
+            "created_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Created At"
+            },
+            "event_id": {
+              "title": "Event Id",
+              "type": "string"
+            },
+            "event_type": {
+              "$ref": "#/$defs/EventType"
+            },
+            "game_id": {
+              "title": "Game Id",
+              "type": "string"
+            },
+            "payload": {
+              "additionalProperties": true,
+              "title": "Payload",
+              "type": "object"
+            },
+            "phase": {
+              "$ref": "#/$defs/Phase"
+            },
+            "round": {
+              "title": "Round",
+              "type": "integer"
+            },
+            "target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Target"
+            },
+            "visibility": {
+              "$ref": "#/$defs/Visibility",
+              "default": "public"
+            }
+          },
+          "required": [
+            "event_id",
+            "game_id",
+            "round",
+            "phase",
+            "event_type"
+          ],
+          "title": "GameEvent",
+          "type": "object"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "Visibility": {
+          "enum": [
+            "public",
+            "private_to_seer",
+            "private_to_witch",
+            "private_to_wolves"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "events": {
+          "items": {
+            "$ref": "#/$defs/GameEvent"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Phase"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Phase"
+        }
+      },
+      "required": [
+        "game_id",
+        "phase"
+      ],
+      "title": "StepGameResponse",
+      "type": "object"
+    },
+    "StrategyMemoryItem": {
+      "$defs": {
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "created_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Created From"
+        },
+        "lesson": {
+          "title": "Lesson",
+          "type": "string"
+        },
+        "memory_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Memory Id"
+        },
+        "role": {
+          "$ref": "#/$defs/Role"
+        },
+        "source_game_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Game Id"
+        },
+        "trigger_condition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trigger Condition"
+        },
+        "usage_count": {
+          "default": 0,
+          "title": "Usage Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "role",
+        "lesson"
+      ],
+      "title": "StrategyMemoryItem",
+      "type": "object"
+    },
+    "Timing": {
+      "additionalProperties": false,
+      "properties": {
+        "intent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Intent"
+        },
+        "mode": {
+          "default": "turn_order",
+          "title": "Mode",
+          "type": "string"
+        },
+        "trigger": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trigger"
+        }
+      },
+      "title": "Timing",
+      "type": "object"
+    },
+    "TruthState": {
+      "$defs": {
+        "Camp": {
+          "enum": [
+            "werewolf",
+            "villager"
+          ],
+          "title": "Camp",
+          "type": "string"
+        },
+        "HunterState": {
+          "additionalProperties": false,
+          "properties": {
+            "can_shoot_after_poisoned": {
+              "default": false,
+              "title": "Can Shoot After Poisoned",
+              "type": "boolean"
+            },
+            "shot_used": {
+              "default": false,
+              "title": "Shot Used",
+              "type": "boolean"
+            }
+          },
+          "title": "HunterState",
+          "type": "object"
+        },
+        "NightState": {
+          "additionalProperties": false,
+          "properties": {
+            "kill_target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Kill Target"
+            },
+            "poison_target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Poison Target"
+            },
+            "saved_target": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Saved Target"
+            },
+            "wolf_nominations": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "title": "Wolf Nominations",
+              "type": "object"
+            }
+          },
+          "title": "NightState",
+          "type": "object"
+        },
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "PlayerState": {
+          "additionalProperties": false,
+          "properties": {
+            "camp": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Camp"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "player_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Player Id"
+            },
+            "public_claim": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Public Claim"
+            },
+            "role": {
+              "$ref": "#/$defs/Role"
+            },
+            "status": {
+              "$ref": "#/$defs/PlayerStatus",
+              "default": "alive"
+            },
+            "vote_weight": {
+              "default": 1.0,
+              "title": "Vote Weight",
+              "type": "number"
+            }
+          },
+          "required": [
+            "role"
+          ],
+          "title": "PlayerState",
+          "type": "object"
+        },
+        "PlayerStatus": {
+          "enum": [
+            "alive",
+            "dead"
+          ],
+          "title": "PlayerStatus",
+          "type": "string"
+        },
+        "Role": {
+          "enum": [
+            "werewolf",
+            "seer",
+            "witch",
+            "hunter",
+            "villager"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "RoundState": {
+          "additionalProperties": false,
+          "properties": {
+            "hunter_death_cause": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Hunter Death Cause"
+            },
+            "is_secondary_stage": {
+              "default": false,
+              "title": "Is Secondary Stage",
+              "type": "boolean"
+            },
+            "last_exiled_player": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Last Exiled Player"
+            },
+            "last_words_done": {
+              "default": false,
+              "title": "Last Words Done",
+              "type": "boolean"
+            },
+            "previous_vote_summary": {
+              "additionalProperties": {
+                "type": "integer"
+              },
+              "title": "Previous Vote Summary",
+              "type": "object"
+            },
+            "tie_candidates": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Tie Candidates",
+              "type": "array"
+            },
+            "tie_vote_round": {
+              "default": 0,
+              "title": "Tie Vote Round",
+              "type": "integer"
+            }
+          },
+          "title": "RoundState",
+          "type": "object"
+        },
+        "WitchState": {
+          "additionalProperties": false,
+          "properties": {
+            "antidote_used": {
+              "default": false,
+              "title": "Antidote Used",
+              "type": "boolean"
+            },
+            "poison_used": {
+              "default": false,
+              "title": "Poison Used",
+              "type": "boolean"
+            }
+          },
+          "title": "WitchState",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "hunter_state": {
+          "$ref": "#/$defs/HunterState"
+        },
+        "night_state": {
+          "$ref": "#/$defs/NightState"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase",
+          "default": "INIT"
+        },
+        "players": {
+          "additionalProperties": {
+            "$ref": "#/$defs/PlayerState"
+          },
+          "title": "Players",
+          "type": "object"
+        },
+        "round": {
+          "default": 1,
+          "title": "Round",
+          "type": "integer"
+        },
+        "round_state": {
+          "$ref": "#/$defs/RoundState"
+        },
+        "witch_state": {
+          "$ref": "#/$defs/WitchState"
+        }
+      },
+      "required": [
+        "game_id"
+      ],
+      "title": "TruthState",
+      "type": "object"
+    },
+    "VisiblePlayer": {
+      "$defs": {
+        "PlayerStatus": {
+          "enum": [
+            "alive",
+            "dead"
+          ],
+          "title": "PlayerStatus",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "player_id": {
+          "title": "Player Id",
+          "type": "string"
+        },
+        "public_claim": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Public Claim"
+        },
+        "status": {
+          "$ref": "#/$defs/PlayerStatus"
+        }
+      },
+      "required": [
+        "player_id",
+        "status"
+      ],
+      "title": "VisiblePlayer",
+      "type": "object"
+    },
+    "VoteRecord": {
+      "$defs": {
+        "Phase": {
+          "enum": [
+            "INIT",
+            "ROLE_ASSIGNMENT",
+            "NIGHT_WEREWOLF",
+            "NIGHT_SEER",
+            "NIGHT_WITCH",
+            "DAY_ANNOUNCEMENT",
+            "HUNTER_SHOOT",
+            "DAY_DISCUSSION",
+            "DAY_VOTE",
+            "DAY_TIE_DISCUSSION",
+            "DAY_TIE_REVOTE",
+            "EXILE_RESOLUTION",
+            "NO_EXILE_RESOLUTION",
+            "EXILE_LAST_WORDS",
+            "WIN_CHECK",
+            "GAME_OVER"
+          ],
+          "title": "Phase",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "投票台账：从 VOTE_CAST 事件派生（跨轮票矩阵）。",
+      "properties": {
+        "derived_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Derived By"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "string"
+        },
+        "is_revote": {
+          "default": false,
+          "title": "Is Revote",
+          "type": "boolean"
+        },
+        "is_tie_candidate_vote": {
+          "default": false,
+          "title": "Is Tie Candidate Vote",
+          "type": "boolean"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "round": {
+          "title": "Round",
+          "type": "integer"
+        },
+        "source_event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Event Id"
+        },
+        "stage": {
+          "default": "primary",
+          "title": "Stage",
+          "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "voter": {
+          "title": "Voter",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "game_id",
+        "round",
+        "phase",
+        "voter"
+      ],
+      "title": "VoteRecord",
+      "type": "object"
+    },
+    "WitchState": {
+      "additionalProperties": false,
+      "properties": {
+        "antidote_used": {
+          "default": false,
+          "title": "Antidote Used",
+          "type": "boolean"
+        },
+        "poison_used": {
+          "default": false,
+          "title": "Poison Used",
+          "type": "boolean"
+        }
+      },
+      "title": "WitchState",
+      "type": "object"
+    }
+  }
+}

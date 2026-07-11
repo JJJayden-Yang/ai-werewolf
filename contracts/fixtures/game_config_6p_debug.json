@@ -1,0 +1,20 @@
+{
+  "game_id": "debug_6p_001",
+  "player_count": 6,
+  "roles": {
+    "werewolf": 2,
+    "seer": 1,
+    "witch": 1,
+    "villager": 2
+  },
+  "max_rounds": 8,
+  "mode": "debug_mock",
+  "rules": {
+    "sheriff_enabled": false,
+    "witch_knows_kill_target": true,
+    "witch_can_save_and_poison_same_night": false,
+    "last_words_enabled": true,
+    "hunter_enabled": false,
+    "tie_break_enabled": true
+  }
+}

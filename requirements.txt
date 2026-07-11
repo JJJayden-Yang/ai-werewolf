@@ -1,0 +1,5 @@
+pydantic>=2.6
+fastapi[standard]>=0.115
+# httpx 已是 fastapi[standard] 的传递依赖；显式声明给 ArkLLMProvider 用，避免上游裁包后崩
+httpx>=0.27
+PyYAML>=6.0

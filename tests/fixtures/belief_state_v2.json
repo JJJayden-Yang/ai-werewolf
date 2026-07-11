@@ -1,0 +1,54 @@
+{
+  "game_id": "fixture_belief_v2",
+  "agent_id": "P1",
+  "round": 2,
+  "phase": "DAY_DISCUSSION",
+  "is_shadow": false,
+  "beliefs": {
+    "P1": {
+      "werewolf": 0.0,
+      "seer": 1.0,
+      "witch": 0.0,
+      "hunter": 0.0,
+      "villager": 0.0,
+      "locked": true,
+      "lock_reason": "own_role_known"
+    },
+    "P2": {
+      "werewolf": 0.62,
+      "seer": 0.08,
+      "witch": 0.07,
+      "hunter": 0.08,
+      "villager": 0.15
+    },
+    "P3": {
+      "werewolf": 0.12,
+      "seer": 0.18,
+      "witch": 0.14,
+      "hunter": 0.16,
+      "villager": 0.4
+    },
+    "P4": {
+      "werewolf": 0.34,
+      "seer": 0.06,
+      "witch": 0.12,
+      "hunter": 0.18,
+      "villager": 0.3
+    },
+    "P5": {
+      "werewolf": 0.18,
+      "seer": 0.1,
+      "witch": 0.42,
+      "hunter": 0.1,
+      "villager": 0.2
+    },
+    "P6": {
+      "werewolf": 0.24,
+      "seer": 0.12,
+      "witch": 0.08,
+      "hunter": 0.36,
+      "villager": 0.2
+    }
+  },
+  "last_updated_event_id": "evt_fixture_day2_discussion"
+}

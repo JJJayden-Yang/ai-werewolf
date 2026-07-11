@@ -1,0 +1,33 @@
+{
+  "game_id": "mvp_9p_001",
+  "player_count": 9,
+  "roles": {
+    "werewolf": 3,
+    "seer": 1,
+    "witch": 1,
+    "hunter": 1,
+    "villager": 3
+  },
+  "max_rounds": 8,
+  "mode": "ai_vs_ai",
+  "agent_version": "v1",
+  "model_config": {
+    "provider": "volcengine_ark",
+    "model_display_name": "Doubao Seed 2.0 Pro",
+    "model_id": "${ARK_MODEL_ID}",
+    "endpoint_id": "${ARK_ENDPOINT_ID}",
+    "temperature": 0.7
+  },
+  "rules": {
+    "sheriff_enabled": false,
+    "witch_knows_kill_target": true,
+    "witch_can_save_and_poison_same_night": false,
+    "last_words_enabled": true,
+    "hunter_enabled": true,
+    "hunter_can_shoot_after_poisoned": false,
+    "tie_break_enabled": true,
+    "tie_discussion_round_limit": 1,
+    "tie_revote_target_scope": "tie_candidates_only",
+    "second_tie_result": "no_exile_go_night"
+  }
+}

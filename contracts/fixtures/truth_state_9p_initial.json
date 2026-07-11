@@ -1,0 +1,28 @@
+{
+  "game_id": "mvp_9p_001",
+  "round": 1,
+  "phase": "NIGHT_WEREWOLF",
+  "players": {
+    "P1": {"role": "werewolf", "camp": "werewolf", "status": "alive", "public_claim": null},
+    "P2": {"role": "werewolf", "camp": "werewolf", "status": "alive", "public_claim": null},
+    "P3": {"role": "werewolf", "camp": "werewolf", "status": "alive", "public_claim": null},
+    "P4": {"role": "seer", "camp": "villager", "status": "alive", "public_claim": null},
+    "P5": {"role": "witch", "camp": "villager", "status": "alive", "public_claim": null},
+    "P6": {"role": "hunter", "camp": "villager", "status": "alive", "public_claim": null},
+    "P7": {"role": "villager", "camp": "villager", "status": "alive", "public_claim": null},
+    "P8": {"role": "villager", "camp": "villager", "status": "alive", "public_claim": null},
+    "P9": {"role": "villager", "camp": "villager", "status": "alive", "public_claim": null}
+  },
+  "witch_state": {"antidote_used": false, "poison_used": false},
+  "hunter_state": {"shot_used": false, "can_shoot_after_poisoned": false},
+  "night_state": {"wolf_nominations": {}, "kill_target": null, "saved_target": null, "poison_target": null},
+  "round_state": {
+    "last_exiled_player": null,
+    "last_words_done": false,
+    "tie_candidates": [],
+    "tie_vote_round": 0,
+    "is_secondary_stage": false,
+    "previous_vote_summary": {},
+    "hunter_death_cause": null
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "game_id": "mvp_9p_001",
+  "agent_id": "P7",
+  "role": "villager",
+  "phase": "DAY_VOTE",
+  "action_type": "vote",
+  "target": "P1",
+  "reason_summary": "vote the exposed werewolf"
+}

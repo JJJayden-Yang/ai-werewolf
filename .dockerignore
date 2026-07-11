@@ -1,0 +1,55 @@
+# 镜像不需要的本地工件。
+# 让 docker build context 瘦身 + 避免泄露 .env / 测试数据。
+
+# Python / venv
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Secrets —— 绝对不进镜像
+.env
+.env.local
+.env.azure
+.env.prod
+.env.*
+# 但保留模板
+!.env.example
+!.env.azure.example
+
+# Git / CI
+.git/
+.gitignore
+.gitattributes
+.gitlab-ci.yml
+.gitlab/
+
+# Tests / Docs / Proposals —— 部署镜像不需要
+tests/
+docs/
+finalPlan/
+
+# IDE
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# Local data (不应进镜像，但开发期 hydrate 测试可能产 data/)
+data/
+logs/
+
+# Docker / Nginx 配置自己 —— build 时按需 COPY，不全量进 context
+Dockerfile
+.dockerignore
+docker-compose.yml
+nginx/
+
+# README / Markdown（可选；保留 README 给镜像里看也行，这里先排除以缩体积）
+*.md

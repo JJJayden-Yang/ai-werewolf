@@ -1,0 +1,9 @@
+{
+  "game_id": "mvp_9p_001",
+  "agent_id": "P1",
+  "role": "werewolf",
+  "phase": "NIGHT_WEREWOLF",
+  "action_type": "night_kill_nominate",
+  "target": "P4",
+  "reason_summary": "nominate the suspected seer"
+}

@@ -1,0 +1,31 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/user/application_security/sast/#available-cicd-variables
+# Secret Detection customization: https://docs.gitlab.com/user/application_security/secret_detection/pipeline/configure/
+# Dependency Scanning customization: https://docs.gitlab.com/user/application_security/dependency_scanning/dependency_scanning_sbom/#customizing-analyzer-behavior
+# Container Scanning customization: https://docs.gitlab.com/user/application_security/container_scanning/#customizing-analyzer-behavior
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ci/variables/#cicd-variable-precedence
+stages:
+- test
+- secret-detection
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
+- template: Security/Secret-Detection.gitlab-ci.yml
+variables:
+  SECRET_DETECTION_ENABLED: 'true'
+secret_detection:
+  stage: secret-detection
+
+# 单元测试门禁(硬保证层) —— 跑全部 tests/：契约冻结(tests/contracts) + game_core A0(tests/game_core)。
+# schema/枚举改了没更新快照、或任意测试失败 → 流水线红，合并前必拦。
+# 详见 contracts/README.md 第 4 节变更流程。
+# 注意：让它真正"挡住合并"还需 Owner/Maintainer 在
+# Settings → Merge requests 勾选 "Pipelines must succeed"。
+pytest:
+  stage: test
+  image: python:3.12-slim
+  script:
+  - pip install -r requirements-dev.txt
+  - pytest -q

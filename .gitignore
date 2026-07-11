@@ -1,0 +1,69 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 临时文件
+.tmp/
+tmp/
+*.tmp
+
+# 日志与输出
+logs/
+*.log
+out/
+dist/
+build/
+
+# 运行时产物（跑局/跑批写出的 EventLog / Trace / Belief / 批报告 / replay truth；
+# 服务器写 /var/lib/ai_wolf/data，本地跑别污染仓库与 MR diff）
+data/strategy_reviews/
+data/events/
+data/traces/
+data/belief_states/
+data/batches/
+data/replay_truth/
+
+# 环境变量
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv*/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Claude Code 本地个人设置 + 仓库内本地 worktree（git worktree 产物，不进共享仓库）
+.claude/settings.local.json
+.claude/worktrees/
+
+# 个人 Agent review prompt（不进共享仓库）
+codex_review_*.md
+
+# 设计样张 / mockup（只是单张演示 HTML，不入库）
+docs/*_mockup.html
+
+# Yuan's tmp files
+./docs/handoff_A_to_codex.md
+docs/Yuan_Phase_Record
+
+# Yuan 本地 LLM 测试沙盒（含 API key，绝不上传；C 真实接入后整个删除）
+scripts/Yuan_local/
+.env.local
+**/.env.local

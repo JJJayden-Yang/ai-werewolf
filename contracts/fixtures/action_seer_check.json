@@ -1,0 +1,9 @@
+{
+  "game_id": "mvp_9p_001",
+  "agent_id": "P4",
+  "role": "seer",
+  "phase": "NIGHT_SEER",
+  "action_type": "check",
+  "target": "P1",
+  "reason_summary": "check the loudest player"
+}

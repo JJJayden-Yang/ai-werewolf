@@ -1,0 +1,125 @@
+version: belief_rules_v2
+credibility_lambda: 0.5
+
+private_confirmations:
+  seer_check_werewolf:
+    target:
+      werewolf: 0.95
+      locked: true
+      lock_reason: "seer_private_check_result"
+
+  seer_check_villager:
+    target:
+      werewolf: 0.05
+      locked: true
+      lock_reason: "seer_private_check_result"
+
+  wolf_teammate:
+    target:
+      werewolf: 1.0
+      locked: true
+      lock_reason: "wolf_team_revealed"
+
+public_claims:
+  claim_seer:
+    scope: "all_alive_agents"
+    actor_delta:
+      seer: 0.45
+      werewolf: 0.35
+
+  # 注：女巫只能靠 claim_witch（显式自称）被识别。其 save/poison 是 PRIVATE_TO_WITCH，
+  # 别的玩家观察不到，没有"女巫用药→抬 witch"的事件规则（强行加 = no-op 或信息泄漏）。
+  claim_witch:
+    scope: "all_alive_agents"
+    actor_delta:
+      witch: 0.35
+      werewolf: 0.12
+
+  claim_hunter:
+    scope: "all_alive_agents"
+    actor_delta:
+      hunter: 0.35
+      werewolf: 0.12
+
+  claim_villager:
+    scope: "all_alive_agents"
+    actor_delta:
+      villager: 0.35
+      werewolf: 0.12
+
+  claim_werewolf:
+    scope: "all_alive_agents"
+    actor_delta:
+      werewolf: 0.35
+
+  claim_check_werewolf:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: 4.00
+
+  claim_check_villager:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: -0.85
+
+  claim_result_actor:
+    scope: "all_alive_agents"
+    actor_delta:
+      seer: 0.55
+
+conflicting_claims:
+  claim_observers_own_unique_role:
+    scope: "agent_perspective"
+    actor_delta:
+      claimed_role: -0.70
+      werewolf: 0.55
+
+  second_claim_same_unique_role:
+    scope: "all_alive_agents"
+    condition:
+      role: "unique_role"
+      max_count: 1
+    current_claimer_delta:
+      claimed_role: 0.0
+      werewolf: 0.25
+    previous_claimers_delta:
+      claimed_role: -0.35
+      werewolf: 0.25
+
+public_events:
+  night_killed:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: -0.85
+      villager: 0.35
+      seer: 0.20
+      witch: 0.12
+
+  vote_cast:
+    scope: "post_game_only"
+
+  claimed_seer_night_killed:
+    scope: "all_alive_agents"
+    target_delta:
+      seer: 1.40
+      werewolf: -1.40
+
+  claimed_seer_survives_night:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: 0.75
+
+  vote_follow_claimed_seer_black:
+    scope: "all_alive_agents"
+    voter_delta:
+      werewolf: -0.40
+
+  vote_against_claimed_seer:
+    scope: "all_alive_agents"
+    voter_delta:
+      werewolf: 0.65
+
+  hunter_shot_target:
+    scope: "all_alive_agents"
+    target_delta:
+      werewolf: 0.30

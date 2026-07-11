@@ -1,0 +1,53 @@
+/* 数据下载页样式 —— 复用 globals.css 的 audit-console 令牌（--audit-*），
+   外层包 .audit-console 即继承浅色底/Inter/CSS 变量，与审计页、策略复盘页保持一致。 */
+
+.de-root { max-width: 820px; margin: 0 auto; }
+.de-kicker { color: var(--audit-gold); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 6px; }
+.de-title { font-size: 26px; font-weight: 700; margin: 0 0 6px; letter-spacing: .2px; color: var(--audit-ink); }
+.de-lede { color: var(--audit-muted); margin: 0 0 24px; max-width: 72ch; }
+.de-lede strong { color: var(--audit-ink); }
+
+.de-section-title { font-size: 13px; font-weight: 700; color: var(--audit-ink); margin: 24px 0 10px; }
+.de-faint { color: var(--audit-muted); font-size: 13px; }
+.de-mono, .de-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+/* 版本选择 tiles */
+.de-arms { display: flex; gap: 12px; flex-wrap: wrap; }
+.de-arm {
+  min-width: 116px; padding: 14px 18px; text-align: left; cursor: pointer;
+  background: var(--audit-panel); border: 1px solid var(--audit-line); border-radius: 8px;
+  box-shadow: var(--audit-shadow); transition: border-color .18s, box-shadow .18s, transform .12s;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.de-arm:hover { border-color: rgba(37,95,153,.4); transform: translateY(-1px); }
+.de-arm.on { border-color: var(--audit-blue); box-shadow: 0 0 0 1px var(--audit-blue) inset, var(--audit-shadow); background: rgba(37,95,153,.04); }
+.de-arm .av { font-size: 20px; font-weight: 700; color: var(--audit-ink); line-height: 1; }
+.de-arm.on .av { color: var(--audit-blue); }
+.de-arm .ac { font-size: 12.5px; color: var(--audit-muted); }
+
+/* 数据类型 */
+.de-types { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+.de-check { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; color: var(--audit-ink); user-select: none; }
+.de-check input { width: 16px; height: 16px; accent-color: var(--audit-blue); cursor: pointer; }
+.de-check .tname { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; }
+
+/* 最近 N 局 */
+.de-limit { display: flex; align-items: center; gap: 10px; color: var(--audit-muted); font-size: 13.5px; margin: 4px 0; }
+.de-input {
+  width: 110px; font: inherit; font-size: 13.5px; color: var(--audit-ink); background: #fff;
+  border: 1px solid var(--audit-line); border-radius: 7px; padding: 8px 12px; outline: none; transition: border-color .18s;
+}
+.de-input:focus { border-color: var(--audit-blue); }
+
+/* 下载按钮 */
+.de-download {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 26px;
+  font-size: 14px; font-weight: 650; padding: 11px 22px; border-radius: 7px;
+  background: rgba(37,95,153,.1); border: 1px solid rgba(37,95,153,.34); color: var(--audit-blue);
+  cursor: pointer; text-decoration: none; transition: background .18s, border-color .18s;
+}
+.de-download:hover { background: rgba(37,95,153,.18); border-color: var(--audit-blue); }
+.de-download[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+.de-download .icon { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.de-divider { height: 1px; background: var(--audit-line); border: 0; margin: 22px 0; }

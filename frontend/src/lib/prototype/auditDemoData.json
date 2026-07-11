@@ -1,0 +1,3513 @@
+{
+  "runs": [
+    {
+      "gameId": "g-20260603115614-9956d5",
+      "createdAt": "2026-06-03T11:56:14.116807+00:00",
+      "playerCount": 9,
+      "strategy": "v1 LLM",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 74,
+      "traceCount": 42,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603115614-9956d5.jsonl",
+      "tracePath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/traces/g-20260603115614-9956d5.jsonl"
+    },
+    {
+      "gameId": "g-20260603113416-e49c83",
+      "createdAt": "2026-06-03T11:34:16.801162+00:00",
+      "playerCount": 9,
+      "strategy": "v1 LLM",
+      "winner": "werewolves",
+      "rounds": 3,
+      "eventCount": 98,
+      "traceCount": 48,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603113416-e49c83.jsonl",
+      "tracePath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/traces/g-20260603113416-e49c83.jsonl"
+    },
+    {
+      "gameId": "g-audit-real-20260603100409",
+      "createdAt": "2026-06-03T10:04:09.421789+00:00",
+      "playerCount": 9,
+      "strategy": "v1 LLM",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 75,
+      "traceCount": 43,
+      "hasAuditPage": true,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-audit-real-20260603100409.jsonl",
+      "tracePath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/traces/g-audit-real-20260603100409.jsonl"
+    },
+    {
+      "gameId": "g-20260603042647-d66006",
+      "createdAt": "2026-06-03T04:26:47.786551+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 48,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042647-d66006.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042647-c701a8",
+      "createdAt": "2026-06-03T04:26:47.760364+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 3,
+      "eventCount": 71,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042647-c701a8.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042647-16c8f5",
+      "createdAt": "2026-06-03T04:26:47.747744+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 47,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042647-16c8f5.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042647-10700c",
+      "createdAt": "2026-06-03T04:26:47.711231+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 47,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042647-10700c.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042647-678301",
+      "createdAt": "2026-06-03T04:26:47.699042+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 48,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042647-678301.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042634-d0bffc",
+      "createdAt": "2026-06-03T04:26:34.141397+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 48,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042634-d0bffc.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042634-97dd78",
+      "createdAt": "2026-06-03T04:26:34.110872+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 3,
+      "eventCount": 71,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042634-97dd78.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042634-6726df",
+      "createdAt": "2026-06-03T04:26:34.098147+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 47,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042634-6726df.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042634-d96960",
+      "createdAt": "2026-06-03T04:26:34.035096+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 47,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042634-d96960.jsonl",
+      "tracePath": null
+    },
+    {
+      "gameId": "g-20260603042634-8a917a",
+      "createdAt": "2026-06-03T04:26:34.021546+00:00",
+      "playerCount": 6,
+      "strategy": "v0/mock",
+      "winner": "werewolves",
+      "rounds": 2,
+      "eventCount": 48,
+      "traceCount": 0,
+      "hasAuditPage": false,
+      "eventPath": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-20260603042634-8a917a.jsonl",
+      "tracePath": null
+    }
+  ],
+  "runAudit": {
+    "summary": {
+      "game_id": "g-audit-real-20260603100409",
+      "seed": 20260603,
+      "agent_version": "v1",
+      "arm": "v1",
+      "status": "completed",
+      "winner": "werewolves",
+      "rounds": 2,
+      "runtime_ms": 871167.738624994,
+      "player_count": 9,
+      "events": 75,
+      "trace_count": 43,
+      "agent_stats": {
+        "ok": 43,
+        "parse_error": 0,
+        "llm_error": 0,
+        "retry": 2,
+        "canonicalize_meta_ai": 0,
+        "canonicalize_cot_leak": 0,
+        "canonicalize_role_leak": 0
+      },
+      "context_window_stats": {
+        "applies": 43,
+        "truncated_speech_events": 6,
+        "progressive_degrade_triggered": 3,
+        "budget_exceeded": 0
+      },
+      "belief_update_errors": 0,
+      "belief_saves": 333,
+      "belief_update_batches": 333,
+      "belief_curve_points": 2997,
+      "event_type_counts": {
+        "role_assigned": 1,
+        "wolf_nomination": 7,
+        "phase_started": 16,
+        "night_kill_announced": 2,
+        "seer_check_result": 2,
+        "witch_kill_target_info": 2,
+        "witch_save": 1,
+        "day_announcement": 2,
+        "speech": 16,
+        "vote_cast": 16,
+        "exile": 2,
+        "death_confirmed": 3,
+        "last_words": 1,
+        "win_check": 2,
+        "agent_action": 1,
+        "game_over": 1
+      },
+      "event_path": "/Users/yangjiangyi/develop/ai_repo/wolf/data/events/g-audit-real-20260603100409.jsonl",
+      "trace_path": "/Users/yangjiangyi/develop/ai_repo/wolf/data/traces/g-audit-real-20260603100409.jsonl"
+    },
+    "events": [
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0001",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "role_assigned",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "player_count": 9,
+          "role_counts": {
+            "werewolf": 3,
+            "seer": 1,
+            "witch": 1,
+            "hunter": 1,
+            "villager": 3
+          }
+        },
+        "created_at": "2026-06-03T10:04:09.421789+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0002",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "wolf_nomination",
+        "actor": null,
+        "target": null,
+        "visibility": "private_to_wolves",
+        "payload": {
+          "teammates": [
+            "P1",
+            "P5",
+            "P8"
+          ]
+        },
+        "created_at": "2026-06-03T10:04:09.422272+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0003",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:04:09.423362+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0004",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "wolf_nomination",
+        "actor": "P1",
+        "target": "P7",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:04:59.530449+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0005",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "wolf_nomination",
+        "actor": "P5",
+        "target": "P6",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:04:59.530503+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0006",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "wolf_nomination",
+        "actor": "P8",
+        "target": "P7",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:04:59.530516+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0007",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "night_kill_announced",
+        "actor": null,
+        "target": "P7",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:04:59.530864+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0008",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_SEER",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:04:59.531783+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0009",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_SEER",
+        "event_type": "seer_check_result",
+        "actor": "P7",
+        "target": "P8",
+        "visibility": "private_to_seer",
+        "payload": {
+          "result": "werewolf"
+        },
+        "created_at": "2026-06-03T10:05:15.795429+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0010",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WITCH",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:05:15.795844+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0011",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WITCH",
+        "event_type": "witch_kill_target_info",
+        "actor": null,
+        "target": "P7",
+        "visibility": "private_to_witch",
+        "payload": {},
+        "created_at": "2026-06-03T10:05:15.795948+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0012",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WITCH",
+        "event_type": "witch_save",
+        "actor": "P4",
+        "target": "P7",
+        "visibility": "private_to_witch",
+        "payload": {},
+        "created_at": "2026-06-03T10:05:28.666859+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0013",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_ANNOUNCEMENT",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:05:28.667657+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0014",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_ANNOUNCEMENT",
+        "event_type": "day_announcement",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "deaths": []
+        },
+        "created_at": "2026-06-03T10:05:28.667914+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0015",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:05:28.679946+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0016",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P1",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "第一天暂时没有太多公开信息，先听听大家的发言再判断，重点关注发言空泛、逻辑站不住脚的玩家。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:05:45.303174+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0017",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P2",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我是好人，认可P1的看法，第一天信息有限，希望后面的玩家尽量多输出有效观点别划水，我会留意发言含糊的玩家。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:06:01.600116+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0018",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P3",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我是好人，同意P1和P2的观点，第一天信息有限，希望后面的玩家多输出有效内容别划水，我也会重点留意发言含糊的玩家。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:06:27.800815+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0019",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P4",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "前面P2、P3的发言几乎完全照搬P1的内容，有跟风划水的嫌疑，我先重点关注这两位。后续发言请大家尽量输出独立观点，不要重复前面内容。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:06:45.106830+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0020",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P5",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我认同P4的看法，P2、P3的发言基本是照搬前面的内容，没有自己的独立判断，跟风划水嫌疑比较大，这一轮我也先重点关注这两位。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:07:04.149754+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0021",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P6",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我认同P4的看法，P2和P3的发言基本照搬前面内容，没有独立判断，跟风划水嫌疑较大，我暂时重点关注这两位，也期待后面玩家输出独立观点。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:07:22.368268+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0022",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P7",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我认同P4的看法，P2和P3全程跟风没有独立观点，嫌疑较大先重点关注，我也会留意后续P8、P9的发言内容。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:07:39.787076+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0023",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P8",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我认同P4的判断，P2和P3的发言完全照搬前面的内容，没有独立观点，跟风划水嫌疑确实不小，这一轮我先重点关注这两位，也等下听P9的发言再判断。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:07:54.995274+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0024",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P9",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我认同前面大家的判断，P2和P3的发言几乎完全照搬前置位内容，没有独立观点，跟风划水嫌疑较大，本轮我先重点关注这两位。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:08:12.775012+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0025",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:08:12.777522+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0026",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P1",
+        "target": "P2",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:08:30.582868+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0027",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P2",
+        "target": "P3",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:08:48.602851+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0028",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P3",
+        "target": "P2",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:09:01.777926+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0029",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P4",
+        "target": "P2",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:09:19.114951+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0030",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P5",
+        "target": "P2",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:09:33.386618+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0031",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P6",
+        "target": "P2",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:09:44.720689+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0032",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P7",
+        "target": "P8",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:12:01.798855+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0033",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P8",
+        "target": "P2",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:12:17.517695+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0034",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P9",
+        "target": "P2",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:12:28.302229+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0035",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "EXILE_RESOLUTION",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:12:28.304403+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0036",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "EXILE_RESOLUTION",
+        "event_type": "exile",
+        "actor": null,
+        "target": "P2",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:12:28.304991+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0037",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "EXILE_RESOLUTION",
+        "event_type": "death_confirmed",
+        "actor": null,
+        "target": "P2",
+        "visibility": "public",
+        "payload": {
+          "death_cause": "exile"
+        },
+        "created_at": "2026-06-03T10:12:28.305026+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0038",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "EXILE_LAST_WORDS",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:12:28.308908+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0039",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "EXILE_LAST_WORDS",
+        "event_type": "last_words",
+        "actor": "P2",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我是好人平民，只是正常认同前置位观点没有划水，P3发言和我几乎完全一致却没被冲票，他嫌疑很大，另外P7独投P8的票型也可以多留意，好人别盘错方向。"
+        },
+        "created_at": "2026-06-03T10:12:49.929979+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0040",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "WIN_CHECK",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:12:49.933753+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0041",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "WIN_CHECK",
+        "event_type": "win_check",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "game_over": false,
+          "winner": null,
+          "reason": null
+        },
+        "created_at": "2026-06-03T10:12:49.934045+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0042",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:12:49.934224+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0043",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "wolf_nomination",
+        "actor": "P1",
+        "target": "P7",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:10.896511+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0044",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "wolf_nomination",
+        "actor": "P5",
+        "target": "P7",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:10.896604+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0045",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "wolf_nomination",
+        "actor": "P8",
+        "target": "P7",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:10.896618+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0046",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF",
+        "event_type": "night_kill_announced",
+        "actor": null,
+        "target": "P7",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:10.896781+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0047",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_SEER",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:10.897634+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0048",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_SEER",
+        "event_type": "seer_check_result",
+        "actor": "P7",
+        "target": "P3",
+        "visibility": "private_to_seer",
+        "payload": {
+          "result": "villager"
+        },
+        "created_at": "2026-06-03T10:14:41.951637+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0049",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WITCH",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:41.952468+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0050",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WITCH",
+        "event_type": "witch_kill_target_info",
+        "actor": null,
+        "target": "P7",
+        "visibility": "private_to_witch",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:41.952603+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0051",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WITCH",
+        "event_type": "agent_action",
+        "actor": "P4",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "action_type": "skip"
+        },
+        "created_at": "2026-06-03T10:14:57.759801+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0052",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_ANNOUNCEMENT",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:57.760354+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0053",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_ANNOUNCEMENT",
+        "event_type": "death_confirmed",
+        "actor": null,
+        "target": "P7",
+        "visibility": "public",
+        "payload": {
+          "death_cause": "night_kill"
+        },
+        "created_at": "2026-06-03T10:14:57.760630+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0054",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_ANNOUNCEMENT",
+        "event_type": "day_announcement",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "deaths": [
+            {
+              "player_id": "P7",
+              "death_cause": "night_kill"
+            }
+          ]
+        },
+        "created_at": "2026-06-03T10:14:57.760646+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0055",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:14:57.763726+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0056",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P1",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "昨晚P7倒牌了，之前P2遗言特意点了P7独投P8的票型，现在P7走了，我觉得优先关注下P3吧，毕竟P2生前就说P3发言和他高度重合却没被冲票，先听P3怎么回应这个疑点。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:15:14.634957+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0057",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P3",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我是好人平民，D1投P2是因为他发言逻辑有问题，他被冲票时踩我纯粹是想拉我垫背。现在P7夜里倒牌大概率是好人，他之前独投P8的票型值得重点关注，另外P1上来就咬我动机也可以留意。",
+          "role_claim": "villager",
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:15:53.207511+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0058",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P4",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "目前P1和P3互踩都有嫌疑，先记下来后续观察。另外P7之前独投P8的票型确实异常，也可以多听听P8的发言解释，先不急下定论，听完所有人发言再统一归票。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:16:14.132923+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0059",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P5",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我觉得P1说的有道理，P2遗言确实点过P3的问题，P3上来就甩锅给P1还揪着P8不放有点急了。P7当时独投P8大概率是D1信息少的随机操作，他现在倒牌是好人，反而说明P8没什么问题，我这轮更关注P3的发言漏洞。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:16:34.017339+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0060",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P6",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "现在P1和P3互踩各有说辞，先记下来两边的疑点，P7之前独投P8的票型确实少见，等听完P8、P9的发言我们再统一梳理嫌疑，别急着过早站队。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:16:49.500463+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0061",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P8",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "D1信息少P7独投我就是随机操作，他现在夜里倒牌是好人正好说明我没问题。P3被P2遗言点了就急着甩锅给P1还揪着我不放，明显是想转移焦点，我这轮更怀疑P3。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:17:05.828849+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0062",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "event_type": "speech",
+        "actor": "P9",
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "public_message": "我觉得P3的嫌疑更大，P2遗言特意点过他，他被踩后急于甩锅P1和P8转移焦点，这轮我优先怀疑P3，同时也会留意P1的后续发言。",
+          "role_claim": null,
+          "claim_result": null
+        },
+        "created_at": "2026-06-03T10:17:20.194593+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0063",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:17:20.196159+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0064",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P1",
+        "target": "P3",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:17:31.359584+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0065",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P3",
+        "target": "P1",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:17:49.438670+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0066",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P4",
+        "target": "P3",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:17:59.309847+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0067",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P5",
+        "target": "P3",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:18:09.740250+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0068",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P6",
+        "target": "P3",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:18:18.875883+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0069",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P8",
+        "target": "P3",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:18:29.645898+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0070",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "event_type": "vote_cast",
+        "actor": "P9",
+        "target": "P3",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:18:40.615293+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0071",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "EXILE_RESOLUTION",
+        "event_type": "phase_started",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:18:40.617085+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0072",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "EXILE_RESOLUTION",
+        "event_type": "exile",
+        "actor": null,
+        "target": "P3",
+        "visibility": "public",
+        "payload": {},
+        "created_at": "2026-06-03T10:18:40.617306+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0073",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "EXILE_RESOLUTION",
+        "event_type": "death_confirmed",
+        "actor": null,
+        "target": "P3",
+        "visibility": "public",
+        "payload": {
+          "death_cause": "exile"
+        },
+        "created_at": "2026-06-03T10:18:40.617349+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0074",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "EXILE_RESOLUTION",
+        "event_type": "win_check",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "game_over": true,
+          "winner": "werewolves",
+          "reason": "werewolves_reached_parity"
+        },
+        "created_at": "2026-06-03T10:18:40.617392+00:00"
+      },
+      {
+        "event_id": "g-audit-real-20260603100409_evt_0075",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "EXILE_RESOLUTION",
+        "event_type": "game_over",
+        "actor": null,
+        "target": null,
+        "visibility": "public",
+        "payload": {
+          "winner": "werewolves",
+          "reason": "werewolves_reached_parity"
+        },
+        "created_at": "2026-06-03T10:18:40.617403+00:00"
+      }
+    ],
+    "traces": [
+      {
+        "trace_id": "g-audit-real-20260603100409:P1:NIGHT_WEREWOLF:1:00c72d05",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "agent_id": "P1",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_WEREWOLF",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P1",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "night_kill_nominate"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 0,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "night_kill_nominate",
+          "target": "P7",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 19283.905083022546,
+          "token_usage": {
+            "prompt_tokens": 6631,
+            "completion_tokens": 534,
+            "total_tokens": 7165
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P5:NIGHT_WEREWOLF:1:cbee00b2",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "agent_id": "P5",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_WEREWOLF",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P5",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "night_kill_nominate"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 0,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "night_kill_nominate",
+          "target": "P6",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 13113.124292023713,
+          "token_usage": {
+            "prompt_tokens": 6631,
+            "completion_tokens": 420,
+            "total_tokens": 7051
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P8:NIGHT_WEREWOLF:1:d29f65a1",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF",
+        "agent_id": "P8",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_WEREWOLF",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P8",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "night_kill_nominate"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 0,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "night_kill_nominate",
+          "target": "P7",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 17695.90533300652,
+          "token_usage": {
+            "prompt_tokens": 6631,
+            "completion_tokens": 555,
+            "total_tokens": 7186
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P7:NIGHT_SEER:1:44203789",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_SEER",
+        "agent_id": "P7",
+        "role": "seer",
+        "agent_version": "v1",
+        "prompt_version_id": "seer:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_SEER",
+          "round": 1,
+          "role": "seer",
+          "agent_id": "P7",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "check"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 0,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "check",
+          "target": "P8",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 16261.194166989299,
+          "token_usage": {
+            "prompt_tokens": 4330,
+            "completion_tokens": 439,
+            "total_tokens": 4769
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P4:NIGHT_WITCH:1:07fad7d2",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "NIGHT_WITCH",
+        "agent_id": "P4",
+        "role": "witch",
+        "agent_version": "v1",
+        "prompt_version_id": "witch:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_WITCH",
+          "round": 1,
+          "role": "witch",
+          "agent_id": "P4",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "poison",
+            "save",
+            "skip"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 0,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "save",
+          "target": "P7",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 12866.736833006144,
+          "token_usage": {
+            "prompt_tokens": 4780,
+            "completion_tokens": 305,
+            "total_tokens": 5085
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P1:DAY_DISCUSSION:1:452ade2b",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P1",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P1",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 1,
+          "recent_public_events_count": 1,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 45,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 16618.105666013435,
+          "token_usage": {
+            "prompt_tokens": 6725,
+            "completion_tokens": 444,
+            "total_tokens": 7169
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P2:DAY_DISCUSSION:1:1cff6075",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P2",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "villager",
+          "agent_id": "P2",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 2,
+          "recent_public_events_count": 2,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 53,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 16291.387000004761,
+          "token_usage": {
+            "prompt_tokens": 4379,
+            "completion_tokens": 483,
+            "total_tokens": 4862
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P3:DAY_DISCUSSION:1:f4bf731a",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P3",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "villager",
+          "agent_id": "P3",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 3,
+          "recent_public_events_count": 3,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 57,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 26195.692916982807,
+          "token_usage": {
+            "prompt_tokens": 4485,
+            "completion_tokens": 699,
+            "total_tokens": 5184
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P4:DAY_DISCUSSION:1:463e9815",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P4",
+        "role": "witch",
+        "agent_version": "v1",
+        "prompt_version_id": "witch:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "witch",
+          "agent_id": "P4",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 4,
+          "recent_public_events_count": 4,
+          "private_events_count": 2
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 66,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 17289.603249984793,
+          "token_usage": {
+            "prompt_tokens": 5098,
+            "completion_tokens": 458,
+            "total_tokens": 5556
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P5:DAY_DISCUSSION:1:fd9a3b7c",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P5",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P5",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 5,
+          "recent_public_events_count": 5,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 62,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 19036.67066700291,
+          "token_usage": {
+            "prompt_tokens": 7161,
+            "completion_tokens": 552,
+            "total_tokens": 7713
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P6:DAY_DISCUSSION:1:b6ca39c3",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P6",
+        "role": "hunter",
+        "agent_version": "v1",
+        "prompt_version_id": "hunter:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "hunter",
+          "agent_id": "P6",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 6,
+          "recent_public_events_count": 6,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 67,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 18213.37883299566,
+          "token_usage": {
+            "prompt_tokens": 5037,
+            "completion_tokens": 544,
+            "total_tokens": 5581
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P7:DAY_DISCUSSION:1:d394c8af",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P7",
+        "role": "seer",
+        "agent_version": "v1",
+        "prompt_version_id": "seer:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "seer",
+          "agent_id": "P7",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 7,
+          "recent_public_events_count": 7,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 53,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 17405.330916983075,
+          "token_usage": {
+            "prompt_tokens": 5745,
+            "completion_tokens": 503,
+            "total_tokens": 6248
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P8:DAY_DISCUSSION:1:286ab497",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P8",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P8",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 8,
+          "recent_public_events_count": 8,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 71,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 15202.527582994662,
+          "token_usage": {
+            "prompt_tokens": 7521,
+            "completion_tokens": 410,
+            "total_tokens": 7931
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P9:DAY_DISCUSSION:1:0561a212",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P9",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 1,
+          "role": "villager",
+          "agent_id": "P9",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 9,
+          "recent_public_events_count": 9,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 59,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 17774.04308397672,
+          "token_usage": {
+            "prompt_tokens": 5221,
+            "completion_tokens": 564,
+            "total_tokens": 5785
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P1:DAY_VOTE:1:0ab782e4",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P1",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P1",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 10,
+          "recent_public_events_count": 10,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P2",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 17794.980875012698,
+          "token_usage": {
+            "prompt_tokens": 7688,
+            "completion_tokens": 511,
+            "total_tokens": 8199
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P2:DAY_VOTE:1:b5583e7e",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P2",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "villager",
+          "agent_id": "P2",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 11,
+          "recent_public_events_count": 11,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P3",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 18013.160292000975,
+          "token_usage": {
+            "prompt_tokens": 5288,
+            "completion_tokens": 481,
+            "total_tokens": 5769
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P3:DAY_VOTE:1:e925da2e",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P3",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "villager",
+          "agent_id": "P3",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 12,
+          "recent_public_events_count": 12,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P2",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 13167.676499986555,
+          "token_usage": {
+            "prompt_tokens": 5326,
+            "completion_tokens": 369,
+            "total_tokens": 5695
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P4:DAY_VOTE:1:1892705f",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P4",
+        "role": "witch",
+        "agent_version": "v1",
+        "prompt_version_id": "witch:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "witch",
+          "agent_id": "P4",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 13,
+          "recent_public_events_count": 13,
+          "private_events_count": 2
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P2",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 17325.52816599491,
+          "token_usage": {
+            "prompt_tokens": 5863,
+            "completion_tokens": 495,
+            "total_tokens": 6358
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P5:DAY_VOTE:1:df0642ab",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P5",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P5",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 14,
+          "recent_public_events_count": 14,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P2",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 14266.089750017272,
+          "token_usage": {
+            "prompt_tokens": 7840,
+            "completion_tokens": 406,
+            "total_tokens": 8246
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P6:DAY_VOTE:1:b2cbc224",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P6",
+        "role": "hunter",
+        "agent_version": "v1",
+        "prompt_version_id": "hunter:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "hunter",
+          "agent_id": "P6",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 15,
+          "recent_public_events_count": 15,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P2",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 11324.758583999937,
+          "token_usage": {
+            "prompt_tokens": 5630,
+            "completion_tokens": 265,
+            "total_tokens": 5895
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P7:DAY_VOTE:1:6c7c11ea",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P7",
+        "role": "seer",
+        "agent_version": "v1",
+        "prompt_version_id": "seer:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "seer",
+          "agent_id": "P7",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 16,
+          "recent_public_events_count": 16,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P8",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 2,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 14531.36579200509,
+          "token_usage": {
+            "prompt_tokens": 6252,
+            "completion_tokens": 356,
+            "total_tokens": 6608
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P8:DAY_VOTE:1:7214f00d",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P8",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "werewolf",
+          "agent_id": "P8",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 17,
+          "recent_public_events_count": 17,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P2",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 15710.954291018425,
+          "token_usage": {
+            "prompt_tokens": 7954,
+            "completion_tokens": 416,
+            "total_tokens": 8370
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P9:DAY_VOTE:1:abeed758",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "DAY_VOTE",
+        "agent_id": "P9",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 1,
+          "role": "villager",
+          "agent_id": "P9",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 18,
+          "recent_public_events_count": 18,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P2",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 10773.442542005796,
+          "token_usage": {
+            "prompt_tokens": 5554,
+            "completion_tokens": 260,
+            "total_tokens": 5814
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P2:EXILE_LAST_WORDS:1:399bb484",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 1,
+        "phase": "EXILE_LAST_WORDS",
+        "agent_id": "P2",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "EXILE_LAST_WORDS",
+          "round": 1,
+          "role": "villager",
+          "agent_id": "P2",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 21,
+          "recent_public_events_count": 10,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 73,
+          "role_claim": "villager",
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 21613.334083987866,
+          "token_usage": {
+            "prompt_tokens": 5153,
+            "completion_tokens": 668,
+            "total_tokens": 5821
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P1:NIGHT_WEREWOLF:2:f0712ff6",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF",
+        "agent_id": "P1",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_WEREWOLF",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P1",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "night_kill_nominate"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 13,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "night_kill_nominate",
+          "target": "P7",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 30253.90724997851,
+          "token_usage": {
+            "prompt_tokens": 7124,
+            "completion_tokens": 953,
+            "total_tokens": 8077
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P5:NIGHT_WEREWOLF:2:f955437f",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF",
+        "agent_id": "P5",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_WEREWOLF",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P5",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "night_kill_nominate"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 13,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "night_kill_nominate",
+          "target": "P7",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 30997.85470799543,
+          "token_usage": {
+            "prompt_tokens": 7124,
+            "completion_tokens": 963,
+            "total_tokens": 8087
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P8:NIGHT_WEREWOLF:2:21de7354",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF",
+        "agent_id": "P8",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_WEREWOLF",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P8",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "night_kill_nominate"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 13,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "night_kill_nominate",
+          "target": "P7",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 19694.24899999285,
+          "token_usage": {
+            "prompt_tokens": 7124,
+            "completion_tokens": 540,
+            "total_tokens": 7664
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P7:NIGHT_SEER:2:f17f907c",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_SEER",
+        "agent_id": "P7",
+        "role": "seer",
+        "agent_version": "v1",
+        "prompt_version_id": "seer:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_SEER",
+          "round": 2,
+          "role": "seer",
+          "agent_id": "P7",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "check"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 13,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "check",
+          "target": "P3",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 31048.970917006955,
+          "token_usage": {
+            "prompt_tokens": 5440,
+            "completion_tokens": 967,
+            "total_tokens": 6407
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P4:NIGHT_WITCH:2:aca1281d",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "NIGHT_WITCH",
+        "agent_id": "P4",
+        "role": "witch",
+        "agent_version": "v1",
+        "prompt_version_id": "witch:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "NIGHT_WITCH",
+          "round": 2,
+          "role": "witch",
+          "agent_id": "P4",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "poison",
+            "skip"
+          ],
+          "current_round_events_count": 0,
+          "recent_public_events_count": 13,
+          "private_events_count": 3
+        },
+        "decision_output": {
+          "action_type": "skip",
+          "target": null,
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 15802.611249993788,
+          "token_usage": {
+            "prompt_tokens": 5236,
+            "completion_tokens": 483,
+            "total_tokens": 5719
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P1:DAY_DISCUSSION:2:47c9dbf8",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P1",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P1",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 2,
+          "recent_public_events_count": 15,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 84,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 16865.017208008794,
+          "token_usage": {
+            "prompt_tokens": 7239,
+            "completion_tokens": 560,
+            "total_tokens": 7799
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P3:DAY_DISCUSSION:2:34fa7cdd",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P3",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 2,
+          "role": "villager",
+          "agent_id": "P3",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 3,
+          "recent_public_events_count": 16,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 89,
+          "role_claim": "villager",
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 38565.279250004096,
+          "token_usage": {
+            "prompt_tokens": 4971,
+            "completion_tokens": 1225,
+            "total_tokens": 6196
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P4:DAY_DISCUSSION:2:ec484e4a",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P4",
+        "role": "witch",
+        "agent_version": "v1",
+        "prompt_version_id": "witch:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 2,
+          "role": "witch",
+          "agent_id": "P4",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 4,
+          "recent_public_events_count": 17,
+          "private_events_count": 3
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 75,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 20918.108165991725,
+          "token_usage": {
+            "prompt_tokens": 5699,
+            "completion_tokens": 670,
+            "total_tokens": 6369
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P5:DAY_DISCUSSION:2:40af20c7",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P5",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P5",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 5,
+          "recent_public_events_count": 18,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 105,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 19878.214249998564,
+          "token_usage": {
+            "prompt_tokens": 7746,
+            "completion_tokens": 614,
+            "total_tokens": 8360
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P6:DAY_DISCUSSION:2:d4d976e0",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P6",
+        "role": "hunter",
+        "agent_version": "v1",
+        "prompt_version_id": "hunter:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 2,
+          "role": "hunter",
+          "agent_id": "P6",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 6,
+          "recent_public_events_count": 19,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 69,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 15475.235624995548,
+          "token_usage": {
+            "prompt_tokens": 5713,
+            "completion_tokens": 421,
+            "total_tokens": 6134
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P8:DAY_DISCUSSION:2:eb6db40a",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P8",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P8",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 7,
+          "recent_public_events_count": 20,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 78,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 16322.609583003214,
+          "token_usage": {
+            "prompt_tokens": 8086,
+            "completion_tokens": 491,
+            "total_tokens": 8577
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P9:DAY_DISCUSSION:2:f73d96d3",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_DISCUSSION",
+        "agent_id": "P9",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_DISCUSSION",
+          "round": 2,
+          "role": "villager",
+          "agent_id": "P9",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "speak"
+          ],
+          "current_round_events_count": 8,
+          "recent_public_events_count": 20,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "speak",
+          "target": null,
+          "public_message_chars": 63,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 14358.969416993205,
+          "token_usage": {
+            "prompt_tokens": 5806,
+            "completion_tokens": 466,
+            "total_tokens": 6272
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P1:DAY_VOTE:2:e1490df8",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "agent_id": "P1",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P1",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 9,
+          "recent_public_events_count": 20,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P3",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 11158.977209008299,
+          "token_usage": {
+            "prompt_tokens": 8259,
+            "completion_tokens": 307,
+            "total_tokens": 8566
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P3:DAY_VOTE:2:da48acac",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "agent_id": "P3",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 2,
+          "role": "villager",
+          "agent_id": "P3",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 10,
+          "recent_public_events_count": 20,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P1",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 18073.71358401724,
+          "token_usage": {
+            "prompt_tokens": 5840,
+            "completion_tokens": 549,
+            "total_tokens": 6389
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P4:DAY_VOTE:2:190d034a",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "agent_id": "P4",
+        "role": "witch",
+        "agent_version": "v1",
+        "prompt_version_id": "witch:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 2,
+          "role": "witch",
+          "agent_id": "P4",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 11,
+          "recent_public_events_count": 20,
+          "private_events_count": 3
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P3",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 9866.52279199916,
+          "token_usage": {
+            "prompt_tokens": 6396,
+            "completion_tokens": 309,
+            "total_tokens": 6705
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P5:DAY_VOTE:2:da4f50eb",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "agent_id": "P5",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P5",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 12,
+          "recent_public_events_count": 20,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P3",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 10423.925540992059,
+          "token_usage": {
+            "prompt_tokens": 8316,
+            "completion_tokens": 327,
+            "total_tokens": 8643
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P6:DAY_VOTE:2:fc4377b7",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "agent_id": "P6",
+        "role": "hunter",
+        "agent_version": "v1",
+        "prompt_version_id": "hunter:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 2,
+          "role": "hunter",
+          "agent_id": "P6",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 13,
+          "recent_public_events_count": 20,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P3",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 9118.946749978932,
+          "token_usage": {
+            "prompt_tokens": 6102,
+            "completion_tokens": 238,
+            "total_tokens": 6340
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P8:DAY_VOTE:2:d62730d3",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "agent_id": "P8",
+        "role": "werewolf",
+        "agent_version": "v1",
+        "prompt_version_id": "werewolf:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 2,
+          "role": "werewolf",
+          "agent_id": "P8",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 14,
+          "recent_public_events_count": 10,
+          "private_events_count": 1
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P3",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 10747.405332978815,
+          "token_usage": {
+            "prompt_tokens": 7911,
+            "completion_tokens": 287,
+            "total_tokens": 8198
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      },
+      {
+        "trace_id": "g-audit-real-20260603100409:P9:DAY_VOTE:2:e4ffde95",
+        "game_id": "g-audit-real-20260603100409",
+        "round": 2,
+        "phase": "DAY_VOTE",
+        "agent_id": "P9",
+        "role": "villager",
+        "agent_version": "v1",
+        "prompt_version_id": "villager:v1_belief_llm",
+        "model_name": "doubao-pro",
+        "input_summary": {
+          "phase": "DAY_VOTE",
+          "round": 2,
+          "role": "villager",
+          "agent_id": "P9",
+          "visible_players_count": 9,
+          "allowed_actions": [
+            "vote"
+          ],
+          "current_round_events_count": 15,
+          "recent_public_events_count": 10,
+          "private_events_count": 0
+        },
+        "decision_output": {
+          "action_type": "vote",
+          "target": "P3",
+          "public_message_chars": 0,
+          "role_claim": null,
+          "claim_result": null
+        },
+        "decision_quality_flags": {
+          "outcome": "ok",
+          "parse_error": false,
+          "llm_error": false,
+          "retry_count": 0,
+          "canonicalize_triggered": [],
+          "soul_id": "default_balanced",
+          "template_name": "v1_belief_llm",
+          "llm_latency_ms": 10954.200082982425,
+          "token_usage": {
+            "prompt_tokens": 5438,
+            "completion_tokens": 316,
+            "total_tokens": 5754
+          }
+        },
+        "context_ref": null,
+        "typed_decision_quality_flags": null,
+        "run_config_snapshot_id": null,
+        "schema_version": "1.0"
+      }
+    ],
+    "phaseOrder": [
+      "R1 / NIGHT_WEREWOLF",
+      "R1 / NIGHT_SEER",
+      "R1 / NIGHT_WITCH",
+      "R1 / DAY_ANNOUNCEMENT",
+      "R1 / DAY_DISCUSSION",
+      "R1 / DAY_VOTE",
+      "R1 / EXILE_RESOLUTION",
+      "R1 / EXILE_LAST_WORDS",
+      "R1 / WIN_CHECK",
+      "R2 / NIGHT_WEREWOLF",
+      "R2 / NIGHT_SEER",
+      "R2 / NIGHT_WITCH",
+      "R2 / DAY_ANNOUNCEMENT",
+      "R2 / DAY_DISCUSSION",
+      "R2 / DAY_VOTE",
+      "R2 / EXILE_RESOLUTION"
+    ],
+    "phaseCounts": {
+      "R1 / NIGHT_WEREWOLF": {
+        "events": 7,
+        "traces": 3,
+        "round": 1,
+        "phase": "NIGHT_WEREWOLF"
+      },
+      "R1 / NIGHT_SEER": {
+        "events": 2,
+        "traces": 1,
+        "round": 1,
+        "phase": "NIGHT_SEER"
+      },
+      "R1 / NIGHT_WITCH": {
+        "events": 3,
+        "traces": 1,
+        "round": 1,
+        "phase": "NIGHT_WITCH"
+      },
+      "R1 / DAY_ANNOUNCEMENT": {
+        "events": 2,
+        "traces": 0,
+        "round": 1,
+        "phase": "DAY_ANNOUNCEMENT"
+      },
+      "R1 / DAY_DISCUSSION": {
+        "events": 10,
+        "traces": 9,
+        "round": 1,
+        "phase": "DAY_DISCUSSION"
+      },
+      "R1 / DAY_VOTE": {
+        "events": 10,
+        "traces": 9,
+        "round": 1,
+        "phase": "DAY_VOTE"
+      },
+      "R1 / EXILE_RESOLUTION": {
+        "events": 3,
+        "traces": 0,
+        "round": 1,
+        "phase": "EXILE_RESOLUTION"
+      },
+      "R1 / EXILE_LAST_WORDS": {
+        "events": 2,
+        "traces": 1,
+        "round": 1,
+        "phase": "EXILE_LAST_WORDS"
+      },
+      "R1 / WIN_CHECK": {
+        "events": 2,
+        "traces": 0,
+        "round": 1,
+        "phase": "WIN_CHECK"
+      },
+      "R2 / NIGHT_WEREWOLF": {
+        "events": 5,
+        "traces": 3,
+        "round": 2,
+        "phase": "NIGHT_WEREWOLF"
+      },
+      "R2 / NIGHT_SEER": {
+        "events": 2,
+        "traces": 1,
+        "round": 2,
+        "phase": "NIGHT_SEER"
+      },
+      "R2 / NIGHT_WITCH": {
+        "events": 3,
+        "traces": 1,
+        "round": 2,
+        "phase": "NIGHT_WITCH"
+      },
+      "R2 / DAY_ANNOUNCEMENT": {
+        "events": 3,
+        "traces": 0,
+        "round": 2,
+        "phase": "DAY_ANNOUNCEMENT"
+      },
+      "R2 / DAY_DISCUSSION": {
+        "events": 8,
+        "traces": 7,
+        "round": 2,
+        "phase": "DAY_DISCUSSION"
+      },
+      "R2 / DAY_VOTE": {
+        "events": 8,
+        "traces": 7,
+        "round": 2,
+        "phase": "DAY_VOTE"
+      },
+      "R2 / EXILE_RESOLUTION": {
+        "events": 5,
+        "traces": 0,
+        "round": 2,
+        "phase": "EXILE_RESOLUTION"
+      }
+    }
+  }
+}
