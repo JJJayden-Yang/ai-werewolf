@@ -137,6 +137,23 @@ python scripts/run_batch.py --arm v2 --games 10 --concurrency 5
 
 Additional scripts in `scripts/` support v0 batch runs, mixed belief experiments, replay export, and strategy review generation.
 
+## Reproducing Experiments
+
+For paper reviewers, the main reproducibility entry points are the batch runners. First run the mock smoke test in Quick Start to verify the local environment. Then configure a real LLM provider in your local `.env` and run the same seed ranges for each arm you want to compare.
+
+```bash
+# Main v0/v1/v2 comparison
+python scripts/run_batch.py --arm v0 --games 30 --seed-start 0 --concurrency 5 --model-flavor DEEPSEEK
+python scripts/run_batch.py --arm v1 --games 30 --seed-start 0 --concurrency 5 --model-flavor DEEPSEEK
+python scripts/run_batch.py --arm v2 --games 30 --seed-start 0 --concurrency 5 --model-flavor DEEPSEEK
+
+# Mixed belief ablations
+python scripts/run_mixed_batch.py --arm-wolves v1 --arm-villagers v0 --games 30 --seed-start 300 --concurrency 4 --model-flavor DEEPSEEK
+python scripts/run_mixed_batch.py --arm-wolves v0 --arm-villagers v1 --games 30 --seed-start 400 --concurrency 4 --model-flavor DEEPSEEK
+```
+
+Batch outputs are written under `AI_WOLF_DATA_DIR` (default `./data`) as JSONL events, traces, belief states, and batch reports. The `data/` directory and `.env` are intentionally ignored by Git. Exact aggregate numbers can vary with model provider, model version, temperature, and rate-limit retries, so use fixed seeds and report the provider/model configuration with any reproduction.
+
 ## Testing
 
 ```bash

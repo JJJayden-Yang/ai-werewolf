@@ -137,6 +137,23 @@ python scripts/run_batch.py --arm v2 --games 10 --concurrency 5
 
 `scripts/` 目录还包含 v0 批跑、混合 belief 实验、replay 导出和策略复盘生成等脚本。
 
+## 复现实验
+
+论文审稿人如需复现，主要入口是批跑脚本。建议先运行快速开始里的 mock smoke test，确认本地环境无误；随后在本地 `.env` 中配置真实 LLM provider，并对需要比较的各个 arm 使用相同 seed 区间。
+
+```bash
+# 主实验：v0/v1/v2 对比
+python scripts/run_batch.py --arm v0 --games 30 --seed-start 0 --concurrency 5 --model-flavor DEEPSEEK
+python scripts/run_batch.py --arm v1 --games 30 --seed-start 0 --concurrency 5 --model-flavor DEEPSEEK
+python scripts/run_batch.py --arm v2 --games 30 --seed-start 0 --concurrency 5 --model-flavor DEEPSEEK
+
+# 混合 belief 消融
+python scripts/run_mixed_batch.py --arm-wolves v1 --arm-villagers v0 --games 30 --seed-start 300 --concurrency 4 --model-flavor DEEPSEEK
+python scripts/run_mixed_batch.py --arm-wolves v0 --arm-villagers v1 --games 30 --seed-start 400 --concurrency 4 --model-flavor DEEPSEEK
+```
+
+批跑产物会写入 `AI_WOLF_DATA_DIR`（默认 `./data`），包括 JSONL events、traces、belief states 和 batch reports。`data/` 和 `.env` 都已被 Git 忽略。由于真实 LLM 会受到供应商、模型版本、temperature 和限流重试影响，聚合数值可能有小幅波动；复现时建议固定 seeds，并在结果中记录 provider/model 配置。
+
 ## 测试
 
 ```bash
