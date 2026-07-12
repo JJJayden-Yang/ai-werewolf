@@ -2,6 +2,8 @@
 
 This project won the Excellence Award in the ByteDance AI Full-Stack Challenge.
 
+![Multi-Agent Werewolf System Architecture](docs/assets/architecture.png)
+
 [中文说明](README.zh-CN.md)
 
 AI Werewolf is a multi-agent experiment platform for imperfect-information social deduction games. It lets multiple LLM agents play Werewolf under strict information isolation, while recording each decision's context, prompt, belief state, action, and outcome for audit, replay, evaluation, and strategy iteration.

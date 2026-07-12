@@ -2,6 +2,8 @@
 
 本项目获得字节跳动 AI 全栈挑战赛优秀奖。
 
+![狼人杀多 Agent 系统架构图](docs/assets/architecture.png)
+
 [English README](README.md)
 
 AI 狼人杀是一个面向信息不对称社交推理游戏的多 Agent 实验平台。它让多个 LLM Agent 在严格信息隔离下进行狼人杀博弈，并记录每一次决策对应的上下文、prompt、belief 状态、行动和结果，用于审计、复盘、评测和策略迭代。
